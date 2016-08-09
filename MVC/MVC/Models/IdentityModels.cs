@@ -21,7 +21,7 @@ namespace MVC.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DataModelPublished", throwIfV1Schema: false)
+            : base($"name={System.Configuration.ConfigurationManager.AppSettings["connectionName"].ToString()}", throwIfV1Schema: false)
         {
         }
 
