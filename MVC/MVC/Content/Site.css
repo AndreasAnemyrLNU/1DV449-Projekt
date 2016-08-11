@@ -1,5 +1,6 @@
 ﻿body {
-    padding-top: 50px;
+    background-color: #222222;
+    padding-top: 100px;
     padding-bottom: 20px;
 }
 
@@ -22,3 +23,110 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.jumbotron{
+    background-color: #222222;
+    color: #CFB53B;
+    margin-top:160px;
+    margin-bottom: 60px;
+    opacity: .94;
+    box-shadow: #EDD69C 0 0 10px;
+}
+
+.container .jumbotron{
+    /*margin: 50px;*/
+    border-radius: 30px;
+    padding: 34px;
+}
+
+.body-content{
+    background-image:url('my-treasure.png');
+    background-size: cover;
+}
+
+p, address{
+    font-size: 15px;
+}
+
+.navbar{
+    border: dotted;
+    border-width: 3px;
+    border-radius: 50px 50px 30px 30px;
+    min-height: 75px;
+    margin:  25px 20px 5px 20px;
+    overflow: no-display;
+    padding-top: 0px;
+    /*padding-left: 50px;*/
+    box-shadow: #EDD69C 0 0px 30px; 
+}
+
+/*bootstrap menu brand*/
+.navbar-inverse .navbar-brand{
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    left: 10px;
+    position: relative;
+    top: 10px
+}
+                
+.navbar-inverse .navbar-nav > li > a{
+    color: #222222;
+}
+.navbar-inverse .navbar-nav > li > a:hover{
+    color: #222222;
+    transform: scale(1.05);
+    transition: 1s;
+    z-index: 999;
+}
+
+.body-content{
+    border-radius: 30px 30px;
+    margin-top: 35px
+}
+
+
+.list-group-item{
+    background-color: #222222;
+    border: 5px solid #000000;
+    border-color: #101010;
+    border-left: 20px solid;
+    border-radius: 5px;
+    margin: 20px 0 0 4px;
+    padding-top: 20px
+}
+
+    .btn-primary{
+    color: #222222;
+    display: inline-block;
+    font-weight: 600;
+    border: none;
+    margin:  10px;
+    box-shadow: #EDD69C 0 0px 7px; 
+
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
+    background: #f6e6b4; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6e6b4 0%, #ed9017 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f6e6b4 0%,#ed9017 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f6e6b4 0%,#ed9017 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 ); /* IE6-9 */
+}
+
+.navbar-toggle{
+    top: 10px;
+    right: 5px
+}
+
+footer p{
+    display: block;
+    background-color: white;
+    border-radius: 30px;
+    font-size: 9px;
+    opacity: .6;
+    padding: 7px;
+}
+
+
+
+
