@@ -16,13 +16,13 @@ namespace MVC.Controllers
     {
         private DataModel db = new DataModel();
 
-        // GET: api/MyNewEntities
+        // GET: api/GrainOfGold
         public IQueryable<GrainOfGold> GetGrainsOfGold()
         {
             return db.GrainsOfGold;
         }
 
-        // GET: api/MyNewEntities/5
+        // GET: api/GrainOfGold/5
         [ResponseType(typeof(GrainOfGold))]
         public IHttpActionResult GetMyNewEntity(int id)
         {
@@ -35,7 +35,7 @@ namespace MVC.Controllers
             return Ok(myNewEntity);
         }
 
-        // PUT: api/MyNewEntities/5
+        // PUT: api/GrainOfGold/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutGrainOfGold(int id, GrainOfGold grainOfFGold)
         {
@@ -70,7 +70,7 @@ namespace MVC.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/MyNewEntities
+        // POST: api/GrainOfGold
         [ResponseType(typeof(GrainOfGold))]
         public IHttpActionResult PostGrainOfGold(GrainOfGold grainOfGold)
         {
@@ -85,7 +85,7 @@ namespace MVC.Controllers
             return CreatedAtRoute("DefaultApi", new { id = grainOfGold.Id }, grainOfGold);
         }
 
-        // DELETE: api/MyNewEntities/5
+        // DELETE: api/GrainOfGold/5
         [ResponseType(typeof(GrainOfGold))]
         public IHttpActionResult DeleteGrainOfGold(int id)
         {
