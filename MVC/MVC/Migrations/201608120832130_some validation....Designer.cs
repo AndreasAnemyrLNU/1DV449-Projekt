@@ -7,13 +7,13 @@ namespace MVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class changedmodelGrainOfGoldagain : IMigrationMetadata
+    public sealed partial class somevalidation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changedmodelGrainOfGoldagain));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(somevalidation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608091504064_changed model GrainOfGold again"; }
+            get { return "201608120832130_some validation..."; }
         }
         
         string IMigrationMetadata.Source

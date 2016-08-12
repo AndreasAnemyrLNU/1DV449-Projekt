@@ -3,16 +3,16 @@ namespace MVC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class changedmodelGrainOfGold : DbMigration
+    public partial class somevalidation : DbMigration
     {
         public override void Up()
         {
-            RenameTable(name: "dbo.RadinOfGolds", newName: "GrainOfGols");
+            AlterColumn("dbo.Apps", "AppName", c => c.String(nullable: false, maxLength: 25));
         }
         
         public override void Down()
         {
-            RenameTable(name: "dbo.GrainOfGols", newName: "RadinOfGolds");
+            AlterColumn("dbo.Apps", "AppName", c => c.String());
         }
     }
 }

@@ -29,7 +29,7 @@ textarea {
     color: #CFB53B;
     margin-top:160px;
     margin-bottom: 60px;
-    opacity: .94;
+    opacity: .98;
     box-shadow: #EDD69C 0 0 10px;
 }
 
@@ -44,7 +44,8 @@ textarea {
     background-size: cover;
 }
 
-p, address{
+caption, a, address, label{
+    color: #CFB53B; 
     font-size: 15px;
 }
 
@@ -62,10 +63,12 @@ p, address{
 
 /*bootstrap menu brand*/
 .navbar-inverse .navbar-brand{
-    color: white;
+    color: #CFB53B;
     font-size: 20px;
     font-weight: 500;
+    font-style:oblique;
     left: 10px;
+    letter-spacing: 2px;
     position: relative;
     top: 10px
 }
@@ -126,6 +129,11 @@ footer p{
     opacity: .6;
     padding: 7px;
 }
+
+.footer-btn-group-sm{
+    float: right;
+}
+
 
 
 

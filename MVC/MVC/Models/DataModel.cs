@@ -1,10 +1,12 @@
 namespace MVC.Models
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
 
-    public class DataModel : DbContext
+    public class WebAppContext : DbContext
     {
         // Your context has been configured to use a 'DataModel' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -12,7 +14,7 @@ namespace MVC.Models
         // 
         // If you wish to target a different database and/or database provider, modify the 'DataModel' 
         // connection string in the application configuration file.
-        public DataModel()
+        public WebAppContext()
             : base($"name={System.Configuration.ConfigurationManager.AppSettings["connectionName"].ToString()}")
         {
         }
@@ -20,12 +22,10 @@ namespace MVC.Models
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
-        public virtual DbSet<GrainOfGold> GrainsOfGold { get; set; }
+        public virtual DbSet<Category> GrainOfGolds { get; set; }
+        public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<App> Apps { get; set; }
         }
 
-        public class GrainOfGold
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-        }
 }
+

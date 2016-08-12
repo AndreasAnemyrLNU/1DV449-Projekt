@@ -7,13 +7,13 @@ namespace MVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class init : IMigrationMetadata
+    public sealed partial class changedmodeltobemoregenericforseveralapps : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(changedmodeltobemoregenericforseveralapps));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608090958175_init"; }
+            get { return "201608120703468_changed model to be more generic for several apps"; }
         }
         
         string IMigrationMetadata.Source

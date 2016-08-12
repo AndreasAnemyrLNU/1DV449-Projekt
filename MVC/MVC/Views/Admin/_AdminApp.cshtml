@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MVC.Models.App>
+
+<table class="table table-striped">
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppName)
+        </td>
+        <td>
+            @Html.ActionLink("Ändra", "Edit", new { controller = "Apps", id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

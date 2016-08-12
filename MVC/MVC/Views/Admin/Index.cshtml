@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MVC.Models.App>
+
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="jumbotron">
+
+    <h2>Adminpanel</h2>
+
+    <!-- Apps -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h6>Appar</h6>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_AdminApp", Model)
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h6>Kategorier (kartor)</h6>
+        </div>
+        <div class="panel-body">
+            @foreach (var app in Model)
+            {
+                @Html.Partial("_AdminCategories", app.Categories)
+            }
+        </div>
+    </div>
+
+</div>
+
+
+
