@@ -10,107 +10,107 @@ using MVC.Models;
 
 namespace MVC.Controllers
 {
-    public class CategoriesController : Controller
+    public class PlacesController : Controller
     {
         private WebAppContext db = new WebAppContext();
 
-        // GET: Categories
+        // GET: Places
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(db.Places.ToList());
         }
 
-        // GET: Categories/Details/5
+        // GET: Places/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(place);
         }
 
-        // GET: Categories/Create
+        // GET: Places/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Places/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Name")] Place place)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.Places.Add(place);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(place);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Places/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(place);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Places/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Place place)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(place).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(place);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Places/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(place);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Places/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            Place place = db.Places.Find(id);
+            db.Places.Remove(place);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

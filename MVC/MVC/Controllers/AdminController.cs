@@ -1,4 +1,5 @@
 ﻿using MVC.Models;
+using MVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,14 @@ namespace MVC.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View(db.Apps.ToList());
+            AdminViewModel model = new AdminViewModel
+            {
+                Apps = db.Apps.ToList<App>(),
+                Categories = db.Categories.ToList<Category>(),
+                Places = db.Places.ToList<Place>()
+            };
+                
+            return View(model);
         }
     }
 }

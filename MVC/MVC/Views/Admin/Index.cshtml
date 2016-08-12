@@ -1,38 +1,100 @@
-﻿@model IEnumerable<MVC.Models.App>
+﻿@model MVC.ViewModels.AdminViewModel
 
-
-@{
-    ViewBag.Title = "Admin";
-}
 
 <div class="jumbotron">
 
-    <h2>Adminpanel</h2>
+    <!-- Applications Start-->
 
-    <!-- Apps -->
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h6>Appar</h6>
-        </div>
-        <div class="panel-body">
-            @Html.Partial("_AdminApp", Model)
-        </div>
-    </div>
+    <p>
+        @Html.ActionLink("Create New", "Create", new { controller = "apps"})
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => Model.Apps)
+            </th>
+            <th></th>
+        </tr>
 
-    <!-- Categories -->
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h6>Kategorier (kartor)</h6>
-        </div>
-        <div class="panel-body">
-            @foreach (var app in Model)
-            {
-                @Html.Partial("_AdminCategories", app.Categories)
-            }
-        </div>
-    </div>
+        @foreach (var item in Model.Apps)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { controller = "apps", id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { controller = "apps", id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { controller = "apps", id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <!-- Applications End -->
 
 </div>
+<div class="jumbotron">
 
+    <!-- Categories Start-->
+    <p>
+        @Html.ActionLink("Create New", "Create", new { controller = "categories" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => Model.Categories)
+            </th>
+            <th></th>
+        </tr>
 
+        @foreach (var item in Model.Categories)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { controller = "categories", id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { controller = "categories", id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { controller = "categories", id = item.Id })
+                </td>
+            </tr>
+        }
 
+    </table>
+    <!-- Categories End -->
+
+</div>
+<div class="jumbotron">
+
+    <!-- Places Start-->
+    <p>
+        @Html.ActionLink("Create New", "Create", new { controller = "places" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => Model.Places)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Places)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { controller = "places", id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { controller = "places", id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { controller = "places", id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <!-- Places End -->
+
+</div>
