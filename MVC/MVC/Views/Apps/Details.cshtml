@@ -1,26 +1,41 @@
-﻿@model MVC.Models.App
+﻿@model MVC.ViewModels.AppViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="jumbotron">
+    <h2>Detaljer</h2>
 
-<div>
-    <h4>App</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AppName)
-        </dt>
+    <div>
+        <h4>App</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.App.AppName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AppName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.App.AppName)
+                <ul class="list-inline">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li class="list-group-item">
+                            @category.Name
+                        </li>
+                    }
+                </ul>
+            </dd>
+        </dl>
 
-    </dl>
+        <div class="well-lg pull-right">
+            <h4>Skapad av: @Model.App.User</h4>
+        </div>
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.App.Id }) |
+        @Html.ActionLink("Back to List", "Index", new { controller = "admin" })
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", new { controller = "admin" })
-</p>
+

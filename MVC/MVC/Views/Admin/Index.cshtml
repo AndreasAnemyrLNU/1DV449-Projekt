@@ -6,7 +6,7 @@
     <!-- Applications Start-->
 
     <p>
-        @Html.ActionLink("Create New", "Create", new { controller = "apps"})
+        @Html.ActionLink("Skapa Ny", "Create", new { controller = "apps"})
     </p>
     <table class="table">
         <tr>
@@ -23,9 +23,9 @@
                     @Html.DisplayFor(modelItem => item.AppName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { controller = "apps", id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { controller = "apps", id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { controller = "apps", id = item.Id })
+                    @Html.ActionLink("Redigera", "Edit", new { controller = "apps", id = item.Id }) |
+                    @Html.ActionLink("Detaljer", "Details", new { controller = "apps", id = item.Id }) |
+                    @Html.ActionLink("Radera", "Delete", new { controller = "apps", id = item.Id })
                 </td>
             </tr>
         }
@@ -38,7 +38,7 @@
 
     <!-- Categories Start-->
     <p>
-        @Html.ActionLink("Create New", "Create", new { controller = "categories" })
+        @Html.ActionLink("Skapa Ny", "Create", new { controller = "categories" })
     </p>
     <table class="table">
         <tr>
@@ -55,9 +55,9 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { controller = "categories", id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { controller = "categories", id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { controller = "categories", id = item.Id })
+                    @Html.ActionLink("Redigera", "Edit", new { controller = "categories", id = item.Id }) |
+                    @Html.ActionLink("Detaljer", "Details", new { controller = "categories", id = item.Id }) |
+                    @Html.ActionLink("Radera", "Delete", new { controller = "categories", id = item.Id })
                 </td>
             </tr>
         }
@@ -70,7 +70,7 @@
 
     <!-- Places Start-->
     <p>
-        @Html.ActionLink("Create New", "Create", new { controller = "places" })
+        @Html.ActionLink("Skapa Ny", "Create", new { controller = "places" })
     </p>
     <table class="table">
         <tr>
@@ -87,9 +87,9 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { controller = "places", id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { controller = "places", id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { controller = "places", id = item.Id })
+                    @Html.ActionLink("Redigera", "Edit", new { controller = "places", id = item.Id }) |
+                    @Html.ActionLink("Detaljer", "Details", new { controller = "places", id = item.Id }) |
+                    @Html.ActionLink("Radera", "Delete", new { controller = "places", id = item.Id })
                 </td>
             </tr>
         }

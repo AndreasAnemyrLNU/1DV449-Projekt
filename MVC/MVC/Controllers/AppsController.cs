@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC.Models;
+using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
@@ -27,18 +28,32 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            App app = db.Apps.Find(id);
-            if (app == null)
+
+            //Add selected app in appViewModel
+            AppViewModel appViewModel = new AppViewModel
+            {
+                App = db.Apps.Find(id)
+            };
+
+            //Add Categories for specfic app
+            appViewModel.Categories = appViewModel.App.Categories;
+
+            if (appViewModel.App == null)
             {
                 return HttpNotFound();
             }
-            return View(app);
+            return View(appViewModel);
         }
 
         // GET: Apps/Create
         public ActionResult Create()
         {
-            return View();
+            AppViewModel appViewModel = new AppViewModel()
+            {
+                Categories = db.Categories.ToList()
+            };
+            
+            return View(appViewModel);
         }
 
         // POST: Apps/Create
@@ -46,16 +61,40 @@ namespace MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,AppName")] App app)
+        public ActionResult Create
+        (
+            [Bind(Include = "App, SelectedCategories")]AppViewModel appViewModel,
+            [Bind(Include = "AppName")]App App 
+        )
         {
+            //Need this in view if modelstate is NOT valid. 
+            //Selectlist get's this...
+            appViewModel.Categories = db.Categories.ToList();
+
             if (ModelState.IsValid)
             {
-                db.Apps.Add(app);
+                appViewModel.App.User = User.Identity.Name;
+                //Save New App
+                db.Apps.Add(appViewModel.App);
+
+                if(appViewModel.SelectedCategories != null)
+                {
+                    //Add Categories For new App
+                    //TODO Replace by lambda expression!
+                    for (int i = 0; i < appViewModel.SelectedCategories.Count(); i++)
+                    {
+                        //Iterating over selection...
+                        appViewModel.App.Categories.Add(db.Categories.Find(appViewModel.SelectedCategories[i]));
+                    }
+                }
+                
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            return View(app);
+            return View(appViewModel);
         }
 
         // GET: Apps/Edit/5
@@ -65,12 +104,19 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            App app = db.Apps.Find(id);
-            if (app == null)
+
+            //Final App in db using ef
+            AppViewModel appViewModel = new AppViewModel()
+            {
+                App = db.Apps.Find(id),
+                Categories = db.Categories
+            };
+            
+            if (appViewModel.App == null)
             {
                 return HttpNotFound();
             }
-            return View(app);
+            return View(appViewModel);
         }
 
         // POST: Apps/Edit/5
@@ -78,15 +124,38 @@ namespace MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AppName")] App app)
+        public ActionResult Edit
+        (
+            [Bind(Include = "App, SelectedCategories")]AppViewModel appViewModel,
+            [Bind(Include = "AppName")]App App
+        )
         {
+            //Load Previous data to model!
+            //Need this for making model complete (Selectlist)
+            appViewModel.PreviousApp = db.Apps.Find(appViewModel.App.Id);
+
             if (ModelState.IsValid)
             {
-                db.Entry(app).State = EntityState.Modified;
+                appViewModel.App.Categories = appViewModel.PreviousApp.Categories;
+                appViewModel.App.Categories.Clear();
+
+                if (appViewModel.SelectedCategories != null)
+                {
+                    //Add new selected Categories For App
+                    //TODO Replace by lambda expression!
+                    for (int i = 0; i < appViewModel.SelectedCategories.Count(); i++)
+                    {                        
+                        //Iterating over selection...
+                        appViewModel.App.Categories.Add(db.Categories.Find(appViewModel.SelectedCategories[i]));
+                    }
+
+                }
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            return View(app);
+            return View(appViewModel);
         }
 
         // GET: Apps/Delete/5
