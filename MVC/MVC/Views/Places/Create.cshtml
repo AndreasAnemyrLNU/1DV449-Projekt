@@ -1,4 +1,4 @@
-﻿@model MVC.Models.Place
+﻿@model MVC.ViewModels.PlaceViewModel
 
 @{
     ViewBag.Title = "Ny Plats";
@@ -7,6 +7,9 @@
 <div class="jumbotron">
     <h2>Ny</h2>
 
+
+
+    
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -14,25 +17,188 @@
         <div class="form-horizontal">
             <h4>Plats</h4>
             <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+            <!-- Google Map Start-->
+            <div class="container">
+                <div class="panel panel-default">
+                    <div class="panel panel-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" id="city_country" type="text" value="Sverige, Stockholm">
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-default form-control" type="button" value="Geocode" onclick="codeAddress()">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="mapCanvas"></div>
+                        </div>
+                    </div>
+                    <div class="panel panel-footer">
+                        <strong>Marker status:</strong>
+                        <div id="markerStatus"><i>Click and drag the marker.</i></div>
+                    </div>
+                </div>
+                
+            </div>
+           
+            <!-- Google Map End -->
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                <div class="panel-body">
+                    <!-- Place Name Start -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Place.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Place.Name, new { htmlAttributes = new { @class = "form-control", @id = "input_name" } })
+                            @Html.ValidationMessageFor(model => model.Place.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- End Name Start -->
+                    <!-- Start Longitude -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Place.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Place.Longitude, new { htmlAttributes = new { @class = "form-control", @id = "input_longitude" } })
+                            @Html.ValidationMessageFor(model => model.Place.Longitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- End Longitude -->
+                    <!-- Start Latitude -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Place.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Place.Latitude, new { htmlAttributes = new { @class = "form-control", @id = "input_latitude" } })
+                            @Html.ValidationMessageFor(model => model.Place.Latitude, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- End Latitiude -->
+                    <!-- Start Address -->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Place.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Place.Address, new { htmlAttributes = new { @class = "form-control", @id = "input_address" } })
+                            @Html.ValidationMessageFor(model => model.Place.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- End Address -->
+                    <!-- Categories Start-->
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Categories, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.ListBoxFor(model => model.SelectedCategories, new SelectList(Model.Categories, "Id", "Name"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SelectedCategories, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- Categories End-->
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Spara" class="btn btn-primary" />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+         </div>
+ 
     }
+
+    <div id="test"></div>
 
     <div>
         @Html.ActionLink("Tillbaka", "Index", new { controller = "admin" })
     </div>
 </div>
 
+ 
+<script>
+    var geocoder;
+    var map;
+    var marker;
+
+    codeAddress = function () {
+        geocoder = new google.maps.Geocoder();
+
+        var address = document.getElementById('city_country').value;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                    zoom: 8,
+                    streetViewControl: false,
+                    mapTypeControlOptions: {
+                        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                        mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.ROADMAP]
+                    },
+                    center: results[0].geometry.location,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                map.setCenter(results[0].geometry.location);
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    draggable: true,
+                    title: 'My Title'
+                });
+                updateMarkerPosition(results[0].geometry.location);
+                geocodePosition(results[0].geometry.location);
+
+                // Add dragging event listeners.
+                google.maps.event.addListener(marker, 'dragstart', function () {
+                    updateMarkerAddress('Dragging...');
+                });
+
+                google.maps.event.addListener(marker, 'drag', function () {
+                    updateMarkerStatus('Dragging...');
+                    updateMarkerPosition(marker.getPosition());
+                });
+
+                google.maps.event.addListener(marker, 'dragend', function () {
+                    updateMarkerStatus('Drag ended');
+                    geocodePosition(marker.getPosition());
+                    map.panTo(marker.getPosition());
+                });
+
+                google.maps.event.addListener(map, 'click', function (e) {
+                    updateMarkerPosition(e.latLng);
+                    geocodePosition(marker.getPosition());
+                    marker.setPosition(e.latLng);
+                    map.panTo(marker.getPosition());
+                });
+
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+    function geocodePosition(pos) {
+        geocoder.geocode({
+            latLng: pos
+        }, function (responses) {
+            if (responses && responses.length > 0) {
+                updateMarkerAddress(responses[0].formatted_address);
+            } else {
+                updateMarkerAddress('Cannot determine address at this location.');
+            }
+        });
+    }
+
+    function updateMarkerStatus(str) {
+        document.getElementById('markerStatus').innerHTML = str;
+    }
+
+    function updateMarkerPosition(latLng) {
+        document.getElementById('input_latitude').value = latLng.lat();
+        document.getElementById('input_longitude').value = latLng.lng();
+    }
+
+    function updateMarkerAddress(str) {
+        document.getElementById('input_address').value = str;
+    }
+</script>
+
+ 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQZH5YuDq0lFmASM7NP4zoB1i66e39QSM&callback=initMap" async defer></script>
+ 

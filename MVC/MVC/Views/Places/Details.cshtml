@@ -1,4 +1,4 @@
-﻿@model MVC.Models.Place
+﻿@model MVC.ViewModels.PlaceViewModel
 
 @{
     ViewBag.Title = "Detaljer Plats";
@@ -7,22 +7,34 @@
 <div class="jumbotron">
     <h2>Detaljer</h2>
 
-    <div>
-        <h4>Plats</h4>
+    <div class="container">
+        <h6>@Html.DisplayNameFor(model => model.Place.Name)</h6>
+        <h4>@Html.DisplayFor(model => model.Place.Name)</h4>        
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+            
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Tillhör dessa kategorier
+            </div>
+            <div class="panel panel-body">
+                <ul class="list-inline">
+                    @foreach (var category in Model.Place.Categories)
+                    {
+                        <li class="list-group-item">
+                            @category.Name
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+         
+        <div class="well-lg pull-right">
+            <h4>Skapad av: @Model.Place.User</h4>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-        </dl>
     </div>
     <p>
-        @Html.ActionLink("Redigera", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Tillbaka", "Index")
+        @Html.ActionLink("Redigera", "Edit", new { id = Model.Place.Id }) |
+        @Html.ActionLink("Tillbaka", "Index", new { controller = "admin" })
     </p>
 </div>

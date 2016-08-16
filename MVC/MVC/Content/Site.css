@@ -134,7 +134,18 @@ footer p{
     float: right;
 }
 
+#mapCanvas{
+    height: 200px;
+  }
 
+#infoPanel {
+    float: left;
+    margin-left: 10px;
+  }
+
+#infoPanel div {
+    margin-bottom: 5px;
+  }
 
 
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC.Models;
+using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
@@ -27,18 +28,27 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Place place = db.Places.Find(id);
-            if (place == null)
+            PlaceViewModel placeViewModel = new PlaceViewModel()
+            {
+                Place = db.Places.Find(id)
+            }; 
+            
+            if (placeViewModel.Place == null)
             {
                 return HttpNotFound();
             }
-            return View(place);
+            return View(placeViewModel);
         }
 
         // GET: Places/Create
         public ActionResult Create()
         {
-            return View();
+            PlaceViewModel placeViewModel = new PlaceViewModel()
+            {
+                Categories = db.Categories.ToList()
+            };
+
+            return View(placeViewModel);
         }
 
         // POST: Places/Create
@@ -46,17 +56,39 @@ namespace MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Place place)
+        public ActionResult Create
+        (
+            [Bind(Include = "Place, SelectedCategories")]PlaceViewModel placeViewModel,
+            [Bind(Include = "Name, Address, Longitude, Latitude, Categories")]Place Place
+        )
         {
+            //Need this in view if modelstate is NOT valid. 
+            //Selectlist get's this...
+            placeViewModel.Categories = db.Categories.ToList();
+
             if (ModelState.IsValid)
             {
-                db.Places.Add(place);
+                placeViewModel.Place.User = User.Identity.Name;
+                //Save New Place
+                db.Places.Add(placeViewModel.Place);
+
+                if (placeViewModel.SelectedCategories != null)
+                {
+                    //Add Categories For new Place
+                    //TODO Replace by lambda expression!
+                    for (int i = 0; i < placeViewModel.SelectedCategories.Count(); i++)
+                    {
+                        //Iterating over selection...
+                        placeViewModel.Place.Categories.Add(db.Categories.Find(placeViewModel.SelectedCategories[i]));
+                    }
+                }
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            return View(place);
-        }
+            return View(placeViewModel);}
 
         // GET: Places/Edit/5
         public ActionResult Edit(int? id)
