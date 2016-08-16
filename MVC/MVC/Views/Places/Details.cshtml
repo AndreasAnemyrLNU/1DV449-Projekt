@@ -1,26 +1,28 @@
 ﻿@model MVC.Models.Place
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detaljer Plats";
 }
 
-<h2>Details</h2>
+<div class="jumbotron">
+    <h2>Detaljer</h2>
 
-<div>
-    <h4>Place</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div>
+        <h4>Plats</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

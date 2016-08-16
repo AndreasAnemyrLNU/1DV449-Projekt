@@ -244,6 +244,10 @@
     <Compile Include="Migrations\201608151551320_some changes for logging user.Designer.cs">
       <DependentUpon>201608151551320_some changes for logging user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608160618228_attribute for validation etc.cs" />
+    <Compile Include="Migrations\201608160618228_attribute for validation etc.Designer.cs">
+      <DependentUpon>201608160618228_attribute for validation etc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\App.cs" />
@@ -367,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608151551320_some changes for logging user.resx">
       <DependentUpon>201608151551320_some changes for logging user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608160618228_attribute for validation etc.resx">
+      <DependentUpon>201608160618228_attribute for validation etc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

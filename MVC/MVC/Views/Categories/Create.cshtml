@@ -1,7 +1,7 @@
 ﻿@model MVC.ViewModels.CategoryViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Skapa Kategori";
 }
 
 <div class="jumbotron">
@@ -27,7 +27,13 @@
             <!-- CategoryName End -->
 
             <!-- Apps Start-->
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.Apps, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ListBoxFor(model => model.SelectedApps, new SelectList(Model.Apps, "Id", "AppName"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SelectedApps, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <!-- Apps End -->
 
             <div class="form-group">

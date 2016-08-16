@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC.Models;
+using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
@@ -27,18 +28,32 @@ namespace MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            
+            //Add selected Category in categoryViewModel
+            CategoryViewModel categoryViewModel = new CategoryViewModel
+            {
+                Category = db.Categories.Find(id)
+            };
+
+            //Add Apps for specfic cateory
+            categoryViewModel.Apps = categoryViewModel.Category.Apps;
+
+            if (categoryViewModel.Category == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(categoryViewModel);
         }
 
         // GET: Categories/Create
         public ActionResult Create()
         {
-            return View();
+            CategoryViewModel categoryViewModel = new CategoryViewModel()
+            {
+                Apps = db.Apps.ToList()
+            };
+
+            return View(categoryViewModel);
         }
 
         // POST: Categories/Create
@@ -46,16 +61,39 @@ namespace MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Create
+        (
+            [Bind(Include = "Category, SelectedApps")]CategoryViewModel categoryViewModel,
+            [Bind(Include = "Name")]Category Category
+        )
         {
+            //Need this in view if modelstate is NOT valid. 
+            //Selectlist get's this...
+            categoryViewModel.Apps = db.Apps.ToList();
+
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                categoryViewModel.Category.User = User.Identity.Name;
+                //Save New App
+                db.Categories.Add(categoryViewModel.Category);
+
+                if (categoryViewModel.SelectedApps != null)
+                {
+                    //Add Categories For new App
+                    //TODO Replace by lambda expression!
+                    for (int i = 0; i < categoryViewModel.SelectedApps.Count(); i++)
+                    {
+                        //Iterating over selection...
+                        categoryViewModel.Category.Apps.Add(db.Apps.Find(categoryViewModel.SelectedApps[i]));
+                    }
+                }
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(categoryViewModel);
         }
 
         // GET: Categories/Edit/5

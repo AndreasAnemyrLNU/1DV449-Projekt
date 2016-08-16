@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace MVC.Models
         }
 
         public int Id { get; set; }
+
+        [DisplayName("Namn")]
+        [StringLength(25, ErrorMessage = "Min 3 tecken, Max 25 tecken", MinimumLength = 3)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Måste anges")]
         public string Name { get; set; }
 
         public string User { get; set; }

@@ -1,29 +1,40 @@
-﻿@model MVC.Models.Category
+﻿@model MVC.ViewModels.CategoryViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detailjer Kategori";
 }
 
-<div class="jumbotron">
-    <h2>Detaljer</h2>
+    <div class="jumbotron">
+        <h2>Detaljer</h2>
 
-    <div>
-        <h4>Kategori</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+        <div>
+            <h4>App</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category.Name)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Category.Name)
+                    <ul class="list-inline">
+                        @foreach (var app in Model.Apps)
+                        {
+                            <li class="list-group-item">
+                                @app.AppName
+                            </li>
+                        }
+                    </ul>
+                </dd>
+            </dl>
 
-        </dl>
+            <div class="well-lg pull-right">
+                <h4>Skapad av: @Model.Category.User</h4>
+            </div>
+
+        </div>
+        <p>
+            @Html.ActionLink("Rediger", "Edit", new { id = Model.Category.Id }) |
+            @Html.ActionLink("Tillbaka", "Index", new { controller = "admin" })
+        </p>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index", new { controller = "admin" })
-    </p>
-
-</div>
