@@ -5,10 +5,6 @@
     ViewBag.Title = "Index";
 }
 
-
-
-
-
 <!DOCTYPE html>
 
 <html>
@@ -20,11 +16,42 @@
     <div class="container">
         <div class="jumbotron">
             <div class="panel panel-default">
-                <div class="panel-heading">
+                <div id="head" class="panel-heading">
+
+                    <div id="destinationElementApps">
+                    </div>
+
+                    <script id="templateApps" type="text/html">
+
+                        {{#RootTagApps}}
+                        <ul class="nav nav-tabs nav-justified">
+                            <li id="app_{{Id}}"role="presentation"><a href="#{{Id}}">{{AppName}}</a></li>
+                        </ul>
+                        {{/RootTagApps}}
+
+                    </script>
+                    
+                    <script id="templateAppsCategories" type="text/html">
+
+                        {{#RootTagAppsCategories}}
+                        <ul class="nav">
+                            <li id="app_category_{{Id}}" role="presentation"><a href="#{{Id}}">{{Name}}</a></li>
+                        </ul>
+                        {{/RootTagAppsCategories}}
+
+                    </script>
+
                 </div>
-                <div class="panel-body">
+                <div class="panel panel-body">
+                    <div id="destinationElementAppsCategories">
+                    </div>
                 </div>
-                <div class="panel-footer">
+                <div id="templateAppsCategories" class="panel panel-body">
+                            
+                    Body!
+
+                </div>
+                <div id="foot" class="panel-footer">
                 </div>
             </div>
         </div>
@@ -37,20 +64,20 @@
 {
     <script>
 
-            //Shit happens!
+            // Intit data to runtime and localstorage
             $.get("http://localhost:44346/apps/GetAppsAsJson", function (data) {
                 saveApps(data);
                 saveAppsCategories();
-                //saveAppsCategoriesPlaces();
-
+                renderApps();
+                addBtnEvent();
             });
 
-            //State Start - offline...
+            //State Start
             State =
             {
                 Apps: [],
             };
-            //State End - offline...
+            // End
 
             //App Constructor
             function App(app)
@@ -60,16 +87,19 @@
                 this.Categories = [];
                 return this;
             }
-
+            
+            //Category Constructor
             function Category(category, places)
             {
                 this.Id = category.Id;
                 this.Name = category.Name;
                 this.User = category.User;
+                //places generated in ajax call.
                 this.Places = places;
                 return this;
             }
 
+            //Place constructor
             function Place(place)
             {
                 this.Id = place.Id;
@@ -81,8 +111,7 @@
                 this.User = place.User;
             }
 
-            //Start local storage
-            //Apps
+            //Apps Saved To Local Storage
             function saveApps(data)
             {
                 localStorage.setItem("localStorageApps", data);
@@ -93,9 +122,10 @@
                     State.Apps.push(new App(app))
                 })
             }
+            // End
 
-            //Apps
-            //Apps -> Categories
+            
+            //Apps -> Categories -> Places
             function saveAppsCategories()
             {
                 $.each(State.Apps, function (i, app) {
@@ -124,14 +154,37 @@
                     })
                 });
             }
-            //Apps -> Categories
-            //Categories -> Places
+            // End
 
-            //Categories ->Places
-            //End local storage
+            // Render
+            function renderApps(e){
+                var templateWithData = Mustache.to_html($("#templateApps").html(), { RootTagApps: State.Apps });
+                $("#destinationElementApps").empty().html(templateWithData);
+            }
+
+            //Add event to show somethig about app....
+            function addBtnEvent() {
+   
+                $.each(State.Apps, function(i, app){
+
+
+                    $("#app_" + app.Id).on('click', function (event) {
+                        renderAppsCategories(app);
+                        event.preventDefault;
+                    })
+                })
+            }
+
+            function renderAppsCategories(app) {
+                console.log(app.Categories);
+                var templateWithData = Mustache.to_html($("#templateAppsCategories").html(), { RootTagAppsCategories: app.Categories });
+                $("#destinationElementAppsCategories").empty().html(templateWithData);
+            }
             
-        
     </script>
+
+    <script src="~/Scripts/mustache.js"></script>
+
 }
 
 

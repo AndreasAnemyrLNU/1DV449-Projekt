@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    public class JaktlagController : Controller
+    public class UIController : Controller
     {
         // GET: Jaktlag
         public ActionResult Index()
