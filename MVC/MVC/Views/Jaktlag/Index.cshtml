@@ -1,0 +1,137 @@
+﻿<!-- No model. Next step is to implement Angular 2 against controller... -->
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@section scripts
+{
+    <script>
+
+            //Shit happens!
+            $.get("http://localhost:44346/apps/GetAppsAsJson", function (data) {
+                saveApps(data);
+                saveAppsCategories();
+                //saveAppsCategoriesPlaces();
+
+            });
+
+            //State Start - offline...
+            State =
+            {
+                Apps: [],
+            };
+            //State End - offline...
+
+            //App Constructor
+            function App(app)
+            {
+                this.Id = app.Id;
+                this.AppName = app.AppName;
+                this.Categories = [];
+                return this;
+            }
+
+            function Category(category, places)
+            {
+                this.Id = category.Id;
+                this.Name = category.Name;
+                this.User = category.User;
+                this.Places = places;
+                return this;
+            }
+
+            function Place(place)
+            {
+                this.Id = place.Id;
+                this.Name = place.Name;
+                this.Address = place.Address;
+                this.Longitude = place.Longitude;
+                this.Latitude = place.Latitude;
+                this.Description = place.Description;
+                this.User = place.User;
+            }
+
+            //Start local storage
+            //Apps
+            function saveApps(data)
+            {
+                localStorage.setItem("localStorageApps", data);
+                var apps = JSON.parse(localStorage.getItem("localStorageApps"));
+
+                //Iterate App Constructor
+                $.each(apps, function (i, app) {
+                    State.Apps.push(new App(app))
+                })
+            }
+
+            //Apps
+            //Apps -> Categories
+            function saveAppsCategories()
+            {
+                $.each(State.Apps, function (i, app) {
+                    SaveAppCategory(app);
+                })
+            }
+
+            function SaveAppCategory(app) {
+                $.get("http://localhost:44346/apps/GetCategoriesByAppAsJson/" + app.Id, function (data) {
+                    var appCategories = JSON.parse(data);
+
+                    //Iterate App Constructor
+                    $.each(appCategories, function (i, category) {
+
+                        $.get("http://localhost:44346/apps/GetPlacesByCategoryAsJson/" + category.Id, function (data) {
+                            var categoryPlaces = JSON.parse(data);
+                            var places = [];
+
+                                $.each(categoryPlaces, function (i, place) {
+                                places.push(new Place(place))        
+                            })
+
+                            app.Categories.push(new Category(category, places))
+                        });
+
+                    })
+                });
+            }
+            //Apps -> Categories
+            //Categories -> Places
+
+            //Categories ->Places
+            //End local storage
+            
+        
+    </script>
+}
+
+

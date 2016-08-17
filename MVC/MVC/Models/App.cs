@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +16,7 @@ namespace MVC.Models
             this.Categories = new HashSet<Category>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         [DisplayName("Namn")]
@@ -24,6 +26,7 @@ namespace MVC.Models
 
         public string User { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Category> Categories { get; set; }
     }
 }

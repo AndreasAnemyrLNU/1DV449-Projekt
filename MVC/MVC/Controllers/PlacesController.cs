@@ -59,7 +59,7 @@ namespace MVC.Controllers
         public ActionResult Create
         (
             [Bind(Include = "Place, SelectedCategories")]PlaceViewModel placeViewModel,
-            [Bind(Include = "Name, Address, Longitude, Latitude, Categories")]Place Place
+            [Bind(Include = "Name, Address, Longitude, Latitude, Description, Categories")]Place Place
         )
         {
             //Need this in view if modelstate is NOT valid. 

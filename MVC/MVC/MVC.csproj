@@ -215,6 +215,7 @@
     <Compile Include="Controllers\AppsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JaktlagController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -275,6 +276,22 @@
     <Compile Include="Migrations\201608161956400_Place test 5.cs" />
     <Compile Include="Migrations\201608161956400_Place test 5.Designer.cs">
       <DependentUpon>201608161956400_Place test 5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608162155489_Place add prop descr..cs" />
+    <Compile Include="Migrations\201608162155489_Place add prop descr..Designer.cs">
+      <DependentUpon>201608162155489_Place add prop descr..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608170751313_Place test 6.cs" />
+    <Compile Include="Migrations\201608170751313_Place test 6.Designer.cs">
+      <DependentUpon>201608170751313_Place test 6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608170757597_Place test 7.cs" />
+    <Compile Include="Migrations\201608170757597_Place test 7.Designer.cs">
+      <DependentUpon>201608170757597_Place test 7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608172033488_changed some models.cs" />
+    <Compile Include="Migrations\201608172033488_changed some models.Designer.cs">
+      <DependentUpon>201608172033488_changed some models.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -370,6 +387,7 @@
     <Content Include="Views\Places\Details.cshtml" />
     <Content Include="Views\Places\Edit.cshtml" />
     <Content Include="Views\Places\Index.cshtml" />
+    <Content Include="Views\Jaktlag\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -424,6 +442,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608161956400_Place test 5.resx">
       <DependentUpon>201608161956400_Place test 5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608162155489_Place add prop descr..resx">
+      <DependentUpon>201608162155489_Place add prop descr..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608170751313_Place test 6.resx">
+      <DependentUpon>201608170751313_Place test 6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608170757597_Place test 7.resx">
+      <DependentUpon>201608170757597_Place test 7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608172033488_changed some models.resx">
+      <DependentUpon>201608172033488_changed some models.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

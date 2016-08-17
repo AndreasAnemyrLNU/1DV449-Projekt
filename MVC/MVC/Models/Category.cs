@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,7 @@ namespace MVC.Models
             this.Places = new HashSet<Place>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         [DisplayName("Namn")]
@@ -26,8 +28,10 @@ namespace MVC.Models
 
         public string User { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<App> Apps { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Place> Places { get; set; }
     }
 }

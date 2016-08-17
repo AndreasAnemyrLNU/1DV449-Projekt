@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using MVC.Models;
 using MVC.ViewModels;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace MVC.Controllers
 {
@@ -183,6 +185,60 @@ namespace MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult GetAppsAsJson()
+        {
+            AppViewModel appViewModel = new AppViewModel();
+
+            IEnumerable<App> apps = db.Apps;
+
+            var jsonResult = JsonConvert.SerializeObject(apps, Formatting.None,
+                              new JsonSerializerSettings
+                              {
+                                  ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                              });
+
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">App id</param>
+        /// <returns>Categories for specific app</returns>
+        public ActionResult GetCategoriesByAppAsJson(int? id = 33)
+        {
+            AppViewModel appViewModel = new AppViewModel();
+
+            IEnumerable<Category> categories = db.Apps.Find(id).Categories;
+
+            var jsonResult = JsonConvert.SerializeObject(categories, Formatting.None,
+                              new JsonSerializerSettings
+                              {
+                                  ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                              });
+
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Category id</param>
+        /// <returns>Places for specific Category</returns>
+        public ActionResult GetPlacesByCategoryAsJson(int? id = 33)
+        {
+
+            IEnumerable<Place> places = db.Categories.Find(id).Places;
+
+            var jsonResult = JsonConvert.SerializeObject(places, Formatting.None,
+                              new JsonSerializerSettings
+                              {
+                                  ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                              });
+
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -193,3 +249,4 @@ namespace MVC.Controllers
         }
     }
 }
+
