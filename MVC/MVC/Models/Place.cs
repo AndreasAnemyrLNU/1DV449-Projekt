@@ -40,5 +40,8 @@ namespace MVC.Models
 
         [JsonIgnore]
         public virtual ICollection<Category> Categories { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Forecast> Forecasts { get; set; }
     }
 }

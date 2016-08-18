@@ -7,13 +7,13 @@ namespace MVC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class changedsomemodels : IMigrationMetadata
+    public sealed partial class forecastchanged : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changedsomemodels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(forecastchanged));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608172033488_changed some models"; }
+            get { return "201608181616322_forecast changed"; }
         }
         
         string IMigrationMetadata.Source

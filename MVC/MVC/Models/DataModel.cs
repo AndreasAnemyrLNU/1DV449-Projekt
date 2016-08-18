@@ -25,6 +25,7 @@ namespace MVC.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Place> Places { get; set; }
         public virtual DbSet<App> Apps { get; set; }
+        public virtual DbSet<Forecast> Forecasts { get; set; }
         }
 
 }

@@ -10,6 +10,7 @@ using MVC.Models;
 using MVC.ViewModels;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using MVC.Models.Services;
 
 namespace MVC.Controllers
 {
@@ -185,7 +186,8 @@ namespace MVC.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult GetAppsAsJson()
+
+        public ActionResult GetApps()
         {
             AppViewModel appViewModel = new AppViewModel();
 
@@ -200,12 +202,7 @@ namespace MVC.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id">App id</param>
-        /// <returns>Categories for specific app</returns>
-        public ActionResult GetCategoriesByAppAsJson(int? id = 33)
+        public ActionResult GetAppCategories(int? id = 33)
         {
             AppViewModel appViewModel = new AppViewModel();
 
@@ -220,23 +217,33 @@ namespace MVC.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id">Category id</param>
-        /// <returns>Places for specific Category</returns>
-        public ActionResult GetPlacesByCategoryAsJson(int? id = 33)
+        public ActionResult GetCategoryPlaces(int? id)
         {
+            IEnumerable<Place> categoryPlaces = db.Categories.Find(id).Places;
 
-            IEnumerable<Place> places = db.Categories.Find(id).Places;
-
-            var jsonResult = JsonConvert.SerializeObject(places, Formatting.None,
+            var jsonResult = JsonConvert.SerializeObject(categoryPlaces, Formatting.None,
                               new JsonSerializerSettings
                               {
                                   ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                               });
 
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetPlaceForecasts(int id)
+        {
+            Place place = db.Places.Find(id);
+            
+            IEnumerable<Forecast> forecasts = new WeatherService(db).RefreshForecast(place.Latitude, place.Longitude);
+
+            var jsonResult = JsonConvert.SerializeObject(forecasts, Formatting.None,
+                              new JsonSerializerSettings
+                              {
+                                  ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                              });
+
+            return Json(jsonResult, JsonRequestBehavior.AllowGet);
+
         }
 
         protected override void Dispose(bool disposing)
