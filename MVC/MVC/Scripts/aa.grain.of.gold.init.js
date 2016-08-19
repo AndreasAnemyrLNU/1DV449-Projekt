@@ -1,5 +1,6 @@
 ﻿var State =
 {
+    CurrentApp: {},
     Apps: []
 }
 //End
@@ -19,6 +20,34 @@ function init()
 {
     GetApps();
     autoSaveToLocalStorage();
+
+    $("body").on("click", function (e) {
+
+
+
+        $.each(State.CurrentApp.Categories, function (i, category) {
+            $("#categories-template").html(renderCategories(State.CurrentApp.Categories));
+        })
+
+        //User clicked in category section
+        if (e.target.getAttribute("data-model") === 'category') {
+
+
+            //Find clicked category in current used app by State.CurrentApp
+                $.each(State.CurrentApp.Categories, function (i, category) {
+
+
+
+                    if (e.target.id === `${replacaSpacesWithUnderscore(category.Name)}_${category.Id}`) {
+
+                        console.log(category);
+
+
+                        $("#places-template").html(renderPlaces(category.Places));
+                    };
+                });
+        };
+    });
 }
       
 function GetApps()
@@ -30,22 +59,32 @@ function GetApps()
         $.each(State.Apps, function (i, app) {
             appBtns.push(renderAppBtn(app));     
         })     
+
+        //Add to DOM (mustache)
         $("#apps-template").html(renderAppPanel(appBtns));
     
        
+        //Init events for app btns...
+        //When user clicks button app is saved in State.CurrentApp!
         $.each(State.Apps, function (i, app) {
-            console.log(app);
-            $("#" + `${replacaSpacesWithUnderscore(app.AppName)}_${app.Id}`).on("click", function (e) {
-                alert();
-            })
-            //$(`#${app.AppName}_${app.Id}"`).on('click', function () {
-            //    alert(app.AppName);
-            //})
+
+            $("#" + `${replacaSpacesWithUnderscore(app.AppName)}_${app.Id}`).on("click", function () {
+                //Set curretn App!
+                State.CurrentApp = app;
+            });
+
         });
         
     });            
 
 }
+
+/*          //Todo fix selected for btns!!!!
+                $(this).removeClass("btn-primary")
+                $(this).addClass("btn-info")
+*/
+
+
 
 function GetAppCategories(app)
 {

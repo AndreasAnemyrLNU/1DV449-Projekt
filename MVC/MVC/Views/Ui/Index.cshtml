@@ -11,21 +11,39 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container">  
         <div class="jumbotron">
-            
             <div class="panel panel-default">
-                <div id="apps-template" class="panel panel-heading">
-                    Loading apps....
+                <div class="panel-heading">
+                    <p class="badge btn-block">Appar</p>
+                    <!-- Apps Start -->
+                    <div id="apps-template" class="">
+                        Loading...
+                    </div>
+                    <!-- Apps End -->
                 </div>
-                <div id="categories-template" class="panel panel-body">
-                    Loading...
+                <div class="panel-body">
+                    <!-- Categories Start -->
+                    <div class="col-md-6">
+                        <p class="badge btn-block">Kategorier</p>
+                        <div id="categories-template" class="">
+                            Loading...
+                        </div>
+                    </div>
+                    <!-- Categories End -->
+                    <!-- Places Start-->
+                    <div class="col-md-6">
+                        <p class="badge btn-block">Platser</p>
+                        <div id="places-template" class="">
+                            Loading...
+                        </div>
+                    </div>
+                    <!-- Places End-->
                 </div>
-                <div id="forecasts-template" class="panel panel-footer">
-                    Loading...
+                <div class="panel-footer">
+
                 </div>
             </div>
-            
         </div>
     </div>
 </body>
@@ -85,6 +103,9 @@
 
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQZH5YuDq0lFmASM7NP4zoB1i66e39QSM&callback=addMarkers" async defer></script>
+
+
+
 
 
 }

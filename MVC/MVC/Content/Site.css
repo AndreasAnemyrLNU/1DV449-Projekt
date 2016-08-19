@@ -103,8 +103,8 @@ caption, a, address, label{
     color: #222222;
     display: inline-block;
     font-weight: 600;
-    border: none;
-    margin:  10px;
+    /*border: none;
+    margin:  10px;*/
     box-shadow: #EDD69C 0 0px 7px; 
 
 
