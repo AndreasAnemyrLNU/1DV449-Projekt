@@ -1,7 +1,4 @@
-﻿<!-- No model. Next step is to implement Angular 2 against controller... -->
-
-
-@{
+﻿@{
     Layout = "~/Views/Shared/_LayoutUi.cshtml";
     ViewBag.Title = "Index";
 }
@@ -16,325 +13,48 @@
 <body>
     <div class="container">
         <div class="jumbotron">
+            
             <div class="panel panel-default">
-                <div id="head" class="panel-heading">
-
-                    <div id="destinationElementApps">
-                    </div>
-
-                    <script id="templateApps" type="text/html">
-
-                        {{#RootTagApps}}
-                        <ul class="nav nav-tabs nav-justified">
-                            <li id="app_{{Id}}"role="presentation"><a href="#{{Id}}">{{AppName}}</a></li>
-                        </ul>
-                        {{/RootTagApps}}
-
-                    </script>
-                    
-                    <script id="templateAppsCategories" type="text/html">
-
-                        {{#RootTagAppsCategories}}
-                        <ul class="nav">
-                            <li id="app_category_{{Id}}" role="presentation"><a href="#{{Id}}">{{Name}}</a></li>
-                        </ul>
-                        {{/RootTagAppsCategories}}
-
-                    </script>
-
+                <div id="apps-template" class="panel panel-heading">
+                    Loading apps....
                 </div>
-                <div class="panel panel-body">
-                    <div id="destinationElementAppsCategories">
-                    </div>
+                <div id="categories-template" class="panel panel-body">
+                    Loading...
                 </div>
-                <div id="templateAppsCategories" class="panel panel-body">
-                            
-
-                            <div id="mapCanvas"></div>
-                        </div>
-
-                </div>
-                <div id="foot" class="panel-footer">
+                <div id="forecasts-template" class="panel panel-footer">
+                    Loading...
                 </div>
             </div>
+            
         </div>
+    </div>
 </body>
 </html>
 
 
 @section scripts
 {
+    <script src="~/Scripts/aa.grain.of.gold.tools.js"></script>
     <script src="~/Scripts/mustache.js"></script>
-
-
-    <script>
-            
-            //State for Application Start
-            var State =
-            {
-                Apps: []
-            }
-            //End
-
-            //Mechanism to save state in localstorage
-            function autoSaveToLocalStorage() {
-                localStorage.setItem("State.Apps", JSON.stringify(State.Apps));
-                console.info("State was now saved into localstorage...")
-
-                renderApps();
-                addBtnEvent();
-
-                setTimeout(autoSaveToLocalStorage, 1000)
-            }
-            // End    
-
-            init();
-
-            function init()
-            {
-                GetApps();
-                autoSaveToLocalStorage();
-            }
-      
-            function GetApps()
-            {
-                $.get("/apps/GetApps", function (data) {
-                    JsonApps2AppsApps(data)
-                });            
-            }
-
-            function GetAppCategories(app)
-            {
-                $.get("/apps/GetAppCategories/" + app.Id, function(data){
-                    app.Categories = JsonAppCategories2AppCategories(data);
-                });
-            }
-
-            function GetCategoryPlaces(category)
-            {
-                $.get("/apps/GetCategoryPlaces/" + category.Id, function (data) {
-                    category.Places = JsonCategoryPlaces2CategoryPlaces(data)
-                });
-            }
-
-            function GetPlaceForecasts(place) {
-                $.get("/apps/GetPlaceForecasts/" + place.Id, function (data) {
-                    place.Forecasts = JsonPlaceForecasts2PlaceForecasts(data)
-                });
-            }
-            
-            //App Constructor
-            function App(app)
-            {
-                this.Id = app.Id;
-                this.AppName = app.AppName;
-                this.Categories = GetAppCategories(this);
-                return this;
-            }
-            
-            //Category Constructor
-            function Category(category, places)
-            {
-                this.Id = category.Id;
-                this.Name = category.Name;
-                this.User = category.User;
-                //places generated in ajax call.
-                this.Places = GetCategoryPlaces(this);
-                return this;
-            }
-
-            //Place constructor
-            function Place(place)
-            {
-                this.Id = place.Id;
-                this.Name = place.Name;
-                this.Address = place.Address;
-                this.Longitude = place.Longitude;
-                this.Latitude = place.Latitude;
-                this.Description = place.Description;
-                this.User = place.User;
-                this.Forecasts = GetPlaceForecasts(this);
-                return this;
-            }
-
-            //Forecast constructor
-            function Forecast(forecast)
-            {
-                this.symbolNumer = forecast.symbolNumer;
-                this.symbolName = forecast.SymbolName;
-                this.symbolVar = forecast.symbolVar;
-                this.windDirectionDeg = forecast.windDirectionDeg;
-                this.windDirectionCode = forecast.windDirectionCode;
-                this.windDirectionName = forecast.windDirectionName;
-                this.windSpeedMps = forecast.windSpeedMps;
-                this.windSpeedName = forecast.windSpeedName;
-                this.temperatureUnit = forecast.temperatureUnit;
-                this.temperatureValue = forecast.temperturValue;
-                this.temperatureMin = forecast.temperatureMin;
-                this.temperatureMax = forecast.temperatureMax;
-                this.pressureUnit = forecast.pressureUnit;
-                this.pressureValue = forecast.pressureValue;
-                this.humidityValue = forecast.humidityValue;
-                this.humidityUnit = forecast.humidityUnit;
-                this.cloudsValue = forecast.cloudsValue;
-                this.cloudsAll = forecast.cloudsAll;
-                this.cloudsUnit = forecast.cloudsUnit;
-                this.timeFrom = forecast.timeFrom;
-                this.timeTo = forecast.timeTo;
-                this.placeId = forecast.PlaceId;
-                return this;
-            }
-
-            //Apps Saved To Local Storage
-            function saveApps(data)
-            {
-                localStorage.setItem("localStorageApps", data);
-                var apps = JSON.parse(localStorage.getItem("localStorageApps"));
-
-                //Iterate App Constructor
-                $.each(apps, function (i, app) {
-                    State.Apps.push(new App(app))
-                })
-            }
-            // End
-
-            
-            //Apps -> Categories -> Places
-            function saveAppsCategories()
-            {
-                $.each(State.Apps, function (i, app) {
-                    SaveAppCategory(app);
-                })
-            }
-            
-            //Ajax
-
-            function InitWeatherForecasts(json)
-            {
-                forecasts = JSON.parse(json);
-                //console.log(WeatherForecastsConstruct(forecasts));
-                var forecastsCreatedWithConstructorFunction = [];
-
-                $.each(forecasts, function (i, forecast) {
-                    forecastsCreatedWithConstructorFunction.push(new Forecast(forecast))
-                })
-                //console.log(forecastsCreatedWithConstructorFunction);
-                return forecastsCreatedWithConstructorFunction;
-            }
-
-            function JsonApps2AppsApps(json) {
-                incoming = JSON.parse(json);
-                //console.info("Apps parsed to generic objects...");
-                //console.info(incoming);
-                var appsNowApps = [];
-
-                $.each(incoming, function (i, app) {
-                    app.UpdateCategories = true;
-                    appsNowApps.push(new App(app))
-                })
-                //console.info("Apps is real apps now!");
-                //console.info(appsNowApps);
-                //Later accessible through object State (State.Apps)
-                State.Apps = appsNowApps;
-            }
-
-            function JsonAppCategories2AppCategories(json) {
-                incoming = JSON.parse(json);
-                //onsole.info("Categories parsed to generic objects...");
-                //console.info(incoming);
-                var appCategoriesNowCategories = [];
-
-                $.each(incoming, function (i, category) {
-                    appCategoriesNowCategories.push(new Category(category))
-                })
-                //console.info("Categories is real categories now!");
-                //console.info(appCategoriesNowCategories);
-                //Later accessible through object State (State.App.Categories)
-                return appCategoriesNowCategories;
-            }
-
-            function JsonCategoryPlaces2CategoryPlaces(json) {
-                incoming = JSON.parse(json);
-                //onsole.info("Categories parsed to generic objects...");
-                //console.info(incoming);
-                var categoryPlacesNowCategoryPlaces = [];
-
-                $.each(incoming, function (i, place) {
-                    categoryPlacesNowCategoryPlaces.push(new Place(place))
-                })
-                //console.info("Categories is real categories now!");
-                //console.info(appCategoriesNowCategories);
-                //Later accessible through object State (State.App.Categories)
-                return categoryPlacesNowCategoryPlaces;
-            }
-
-            function JsonPlaceForecasts2PlaceForecasts(json) {
-                incoming = JSON.parse(json);
-                //onsole.info("Categories parsed to generic objects...");
-                //console.info(incoming);
-                var placeForecastsNowPlaceForecasts = [];
-
-                $.each(incoming, function (i, forecast) {
-                    placeForecastsNowPlaceForecasts.push(new Forecast(forecast))
-                })
-                //console.info("Categories is real categories now!");
-                //console.info(appCategoriesNowCategories);
-                //Later accessible through object State (State.App.Categories)
-                return placeForecastsNowPlaceForecasts;
-            } 
-            // End
-
-
-            // Render
-            function renderApps(e) {
-
-                var templateWithData = Mustache.to_html($("#templateApps").html(), { RootTagApps: State.Apps });
-                $("#destinationElementApps").empty().html(templateWithData);
-            }
-
-            //Add event to show somethig about app....
-            function addBtnEvent() {
-   
-                $.each(State.Apps, function(i, app){
-
-
-                    var btn = $("#app_" + app.Id).on('click', function (event) {
-                        renderAppsCategories(app);
-                        event.preventDefault;
-                    })
-                })
-            }
-
-            function renderAppsCategories(app) {
-                console.log(app.Categories);
-                var templateWithData = Mustache.to_html($("#templateAppsCategories").html(), { RootTagAppsCategories: app.Categories });
-                $("#destinationElementAppsCategories").empty().html(templateWithData);
-
-                addMarkers(app.Categories);
-
-                
-
-            }
-            
-    </script>
+    <script src="~/Scripts/aa.grain.of.gold.init.js"></script>
+    <script src="~/Scripts/aa.grain.of.gold.App.js"></script>
+    <script src="~/Scripts/aa.grain-of-gold.json2Types.js"></script>  
+    <script src="~/Scripts/aa.grain.of.gold.Category.js"></script>
+    <script src="~/Scripts/aa.grain.of.gold.Place.js"></script>
+    <script src="~/Scripts/aa.grain.of.gold.Forecast.js"></script>
+    <script src="~/Scripts/aa.grain.of.gold.mustache.templates.js"></script>
 
     <script>
-
-        function addMarkers(categories){
+        function addMarkers(categories) {
 
             var locations = [];
             $.each(categories, function (i, category) {
-
-                console.log(category);
-
                 $.each(category.Places, function (i, place) {
+
                     locations.push([place.Name, place.Latitude, place.Longitude]);
                 })
 
             })
-
-            console.warn(locations);
-
 
             var map = new google.maps.Map(document.getElementById('mapCanvas'), {
                 zoom: 4,
@@ -360,8 +80,9 @@
                 })(marker, i));
             }
         }
-
     </script>
+    
+
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQZH5YuDq0lFmASM7NP4zoB1i66e39QSM&callback=addMarkers" async defer></script>
 
