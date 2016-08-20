@@ -50,7 +50,29 @@ function renderPlaceContent(place) {
 		console.warn(err.message)
 	}
 
-	var tpl = `placecontent should come here`;
-	return Mustache.to_html(tpl, place)
+	var tpl =
+    `<h6 class="text-info"><strong >Namn: {{Name}}</strong><h6>` +
+	`<h6 class="text-info"><strong >Info: {{Description}}</strong><h6>` +
+	`<h6 class="text-info"><strong >Sparad av: {{User}}</strong><h6>` +
+    `<div class="panel panel-default"` +
+        `<div class="panel panel-heading"` +
+            `Minnesplatsens väderdata idag!` +
+        `</div>` +
+        `<div class="panel-body">` +
+            `{{#Forecasts}}{{>Forecast}}{{/Forecasts}}` +
+        `</div` +
+    `</div>`;
+                
+
+    //Forecasts
+	var partials =
+    {
+    	Forecast:
+        `<div class="well">` +
+            `<h6>asdf</h6>` +
+        `</div>`
+    }
+	return Mustache.to_html(tpl, place, partials)
+
 }
 //Place End
