@@ -43,7 +43,8 @@ function renderPlaceBtn(place) {
 }
 
 function renderPlaceContent(place) {
-	try{
+
+	try {
 		if(!place instanceof Place)
 			throw new Error("the function renderPlaceContent() takes only obj of Type Place!")
 	} catch (err) {
@@ -54,13 +55,9 @@ function renderPlaceContent(place) {
     `<h6 class="text-info"><strong >Namn: {{Name}}</strong><h6>` +
 	`<h6 class="text-info"><strong >Info: {{Description}}</strong><h6>` +
 	`<h6 class="text-info"><strong >Sparad av: {{User}}</strong><h6>` +
-    `<div class="panel panel-default"` +
-        `<div class="panel panel-heading"` +
-            `Minnesplatsens väderdata idag!` +
-        `</div>` +
-        `<div class="panel-body">` +
-            `{{#Forecasts}}{{>Forecast}}{{/Forecasts}}` +
-        `</div` +
+    `<div class="jumbotron">` +
+        `<h3 class="text-center" >Minnesmärkets väderdata idag!</h3>` +
+        `{{#Forecasts}}{{>Forecast}}{{/Forecasts}}` +
     `</div>`;
                 
 
@@ -68,10 +65,26 @@ function renderPlaceContent(place) {
 	var partials =
     {
     	Forecast:
-        `<div class="well">` +
-            `<h6>asdf</h6>` +
-        `</div>`
+            `<div id="container-weather-data">` +
+            `<div class="well well-with-padding col-xs-12 col-sm-4 col-md-3 col-lg-2">` +
+                `<div class="panel-body">` +
+                    `<h4 class=text-center>{{temperatureMin}} &#8451</h4>` +
+                    `<img src={{GetWeatherSymbol}} />` +
+    	            //Compass Start
+                    `<div class="compass">` +
+                        `<div class="direction">` +
+                            `<p>{{windDirectionCode}}<span>{{windSpeedMps}} Mps</span></p>` +
+                        `</div>` +
+                        `<div class="arrow {{GetWindDirectionCode}}"></div>` +
+                    `</div>` +
+                    //Compas End
+                    `<h5 class="access-time text-center">Från kl {{GetTimeFrom}}</h5>` +
+                    `<h5 class="access-time text-center">Dag {{GetDate}}/{{GetMonth}}</h5>` +
+                `</div>` +
+    	    `</div>` +
+            `</div`
     }
+
 	return Mustache.to_html(tpl, place, partials)
 
 }
