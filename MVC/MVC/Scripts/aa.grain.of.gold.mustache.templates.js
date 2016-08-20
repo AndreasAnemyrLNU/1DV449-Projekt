@@ -8,7 +8,7 @@ function renderAppPanel(htmlAppBtns) {
 }
 
 function renderAppBtn(app) {
-	var tpl = `<btn id="${replacaSpacesWithUnderscore(app.AppName)}_${app.Id}" class='btn btn-block btn-primary'>{{AppName}}</btn>`;
+	var tpl = `<btn id="${replacaSpacesWithUnderscore(app.AppName)}_${app.Id}" class='btn btn-block btn-primary-ui-app'>{{AppName}}</btn>`;
 	return Mustache.to_html(tpl, app)
 }
 //App End
@@ -23,7 +23,7 @@ function renderCategories(categories) {
 }
 
 function renderCategoryBtn(category) {
-	var tpl = `<btn id="${replacaSpacesWithUnderscore(category.Name)}_${category.Id}" class='btn btn-block btn-primary' data-model='category'>{{Name}}</btn>`;
+	var tpl = `<btn id="${replacaSpacesWithUnderscore(category.Name)}_${category.Id}" class='btn btn-block btn-primary-ui-category' data-model='category'>{{Name}}</btn>`;
 	return Mustache.to_html(tpl, category)
 }
 //Category End
@@ -32,13 +32,25 @@ function renderCategoryBtn(category) {
 function renderPlaces(places) {
 	var html = ""
 	$.each(places, function (i, place) {
-		html += renderCategoryBtn(place)
+		html += renderPlaceBtn(place)
 	})
 	return "<div>" + html + "</div>"
 }
 
 function renderPlaceBtn(place) {
-	var tpl = `<btn id="${replacaSpacesWithUnderscore(place.Name)}_${category.Id}" class='btn btn-sm btn-primary'>{{Name}}</btn>`;
-	return Mustache.to_html(tpl, category)
+	var tpl = `<btn id="${replacaSpacesWithUnderscore(place.Name)}_${place.Id}" class='btn btn-sm btn-primary-ui' data-model='place'>{{Name}}</btn>`;
+	return Mustache.to_html(tpl, place)
+}
+
+function renderPlaceContent(place) {
+	try{
+		if(!place instanceof Place)
+			throw new Error("the function renderPlaceContent() takes only obj of Type Place!")
+	} catch (err) {
+		console.warn(err.message)
+	}
+
+	var tpl = `placecontent should come here`;
+	return Mustache.to_html(tpl, place)
 }
 //Place End

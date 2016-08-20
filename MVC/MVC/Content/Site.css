@@ -99,14 +99,51 @@ caption, a, address, label{
     padding-top: 20px
 }
 
-    .btn-primary{
+.btn-primary{
     color: #222222;
     display: inline-block;
     font-weight: 600;
-    /*border: none;
-    margin:  10px;*/
+    border: none;
+    margin:  10px;
     box-shadow: #EDD69C 0 0px 7px; 
 
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
+    background: #f6e6b4; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6e6b4 0%, #ed9017 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f6e6b4 0%,#ed9017 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f6e6b4 0%,#ed9017 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-primary-ui-app{
+    color: #222222;
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin:  0;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: #EDD69C 0 0px 7px; 
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
+    background: #f6e6b4; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6e6b4 0%, #ed9017 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f6e6b4 0%,#ed9017 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f6e6b4 0%,#ed9017 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-primary-ui-category{
+    color: #222222;
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin:  0;
+    padding: 11px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: #EDD69C 0 0px 7px; 
 
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
     background: #f6e6b4; /* Old browsers */

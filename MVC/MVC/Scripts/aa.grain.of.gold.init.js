@@ -23,30 +23,48 @@ function init()
 
     $("body").on("click", function (e) {
 
-
-
         $.each(State.CurrentApp.Categories, function (i, category) {
             $("#categories-template").html(renderCategories(State.CurrentApp.Categories));
+            //Reset places container becaus app is clicked...
+            $("#places-template").html(renderPlaces(""));
+
         })
 
-        //User clicked in category section
+        //User clicked in categories section
         if (e.target.getAttribute("data-model") === 'category') {
 
-
             //Find clicked category in current used app by State.CurrentApp
-                $.each(State.CurrentApp.Categories, function (i, category) {
+            $.each(State.CurrentApp.Categories, function (i, category) {
+                if (e.target.id === `${replacaSpacesWithUnderscore(category.Name)}_${category.Id}`) {
+                    $("#places-template").html(renderPlaces(category.Places));
+                };
+            });
+        };
 
+        //User clicked in places section
+        if (e.target.getAttribute("data-model") === 'place') {
 
-
-                    if (e.target.id === `${replacaSpacesWithUnderscore(category.Name)}_${category.Id}`) {
-
-                        console.log(category);
-
-
-                        $("#places-template").html(renderPlaces(category.Places));
+            //Find clicked place in current used app by recursive searching in State.CurrentApp. 
+            //State.CurrentApp.Categories-- > Category.Places-- > Place
+            $.each(State.CurrentApp.Categories, function (i, category) {
+                $.each(category.Places, function (i, place) {
+                    if (e.target.id === `${replacaSpacesWithUnderscore(place.Name)}_${place.Id}`) {
+                        //Found place model. Time fo rendering now....
+                        try{
+                            if (typeof renderPlaceContent == 'function') { 
+                                $("#place-content-template").html(renderPlaceContent(place)); 
+                            }
+                            else {
+                                throw new Error("function renderPlaceContent does not exist. Create it!")
+                            }
+                        }catch(err){
+                            console.warn(err)
+                        }
                     };
                 });
+            });
         };
+
     });
 }
       
@@ -72,18 +90,14 @@ function GetApps()
                 //Set curretn App!
                 State.CurrentApp = app;
             });
-
         });
-        
     });            
-
 }
 
 /*          //Todo fix selected for btns!!!!
                 $(this).removeClass("btn-primary")
                 $(this).addClass("btn-info")
 */
-
 
 
 function GetAppCategories(app)
