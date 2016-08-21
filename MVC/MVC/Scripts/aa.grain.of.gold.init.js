@@ -1,5 +1,6 @@
 ﻿var State =
 {
+    CurrentPlace: null,
     CurrentApp: {},
     Apps: []
 }
@@ -49,14 +50,17 @@ function init()
             $.each(State.CurrentApp.Categories, function (i, category) {
                 $.each(category.Places, function (i, place) {
                     if (e.target.id === `${replacaSpacesWithUnderscore(place.Name)}_${place.Id}`) {
-                        //Found place model. Time fo rendering now....
-                        try{
-                            if (typeof renderPlaceContent == 'function') { 
-                                $("#place-content-template").html(renderPlaceContent(place)); 
-                            }
-                            else {
-                                throw new Error("function renderPlaceContent does not exist. Create it!")
-                            }
+                        //Found Place (model), Save state first...
+                        State.CurrentPlace = place;
+                        console.log(State.CurrentPlace);
+                        //Now we can render, State is used for easy adding marker to map...
+                        try {
+                                if (typeof renderPlaceContent == 'function') { 
+                                        $("#place-content-template").html(renderPlaceContent(place)); 
+                                    }
+                                else {
+                                    throw new Error("function renderPlaceContent does not exist. Create it!")
+                                }
                         }catch(err){
                             console.warn(err)
                         }
@@ -64,7 +68,6 @@ function init()
                 });
             });
         };
-
     });
 }
       

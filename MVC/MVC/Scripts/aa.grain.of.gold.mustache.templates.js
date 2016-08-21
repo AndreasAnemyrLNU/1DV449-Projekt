@@ -44,24 +44,19 @@ function renderPlaceBtn(place) {
 
 function renderPlaceContent(place) {
 
-	try {
-		if(!place instanceof Place)
-			throw new Error("the function renderPlaceContent() takes only obj of Type Place!")
-	} catch (err) {
-		console.warn(err.message)
-	}
 
 	var tpl =
     `<h6 class="text-info"><strong >Namn: {{Name}}</strong><h6>` +
 	`<h6 class="text-info"><strong >Info: {{Description}}</strong><h6>` +
 	`<h6 class="text-info"><strong >Sparad av: {{User}}</strong><h6>` +
-    `<div class="jumbotron">` +
+    `<div id="mapCanvasPlace"></div>` +
+    `<div class="jumbotron jumbotron-forecasts">` +
         `<h3 class="text-center" >Minnesmärkets väderdata idag!</h3>` +
         `{{#Forecasts}}{{>Forecast}}{{/Forecasts}}` +
-    `</div>`;
+    `</div>` +
+	`<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQZH5YuDq0lFmASM7NP4zoB1i66e39QSM&callback=addPlaceMarker" async defer></script>`;
                 
-
-    //Forecasts
+    //PlaceContent Partials Start
 	var partials =
     {
     	Forecast:
@@ -89,3 +84,4 @@ function renderPlaceContent(place) {
 
 }
 //Place End
+

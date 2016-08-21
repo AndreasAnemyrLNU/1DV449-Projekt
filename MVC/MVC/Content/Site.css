@@ -173,7 +173,11 @@ footer p{
 
 #mapCanvas{
     height: 200px;
-  }
+}
+
+#mapCanvasPlace{
+    height: 300px;
+}
 
 #infoPanel {
     float: left;
@@ -322,6 +326,20 @@ footer p{
     background-color: #999;
     height: 450px;
     overflow: scroll;
+}
+
+.jumbotron-forecasts{
+    position: relative;
+    top: -50px;
+}
+
+.container-main{ 
+    border: 5px double black;
+    border-radius: 20px;
+    padding: 0;
+    margin-bottom: 0;
+    position: relative;
+    top: 20px;
 }
 
 /*Compass End*/

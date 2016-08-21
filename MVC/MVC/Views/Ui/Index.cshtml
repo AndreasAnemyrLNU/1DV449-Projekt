@@ -11,8 +11,8 @@
     <title>Index</title>
 </head>
 <body>
-    <div class="container">  
-        <div class="jumbotron">
+    <div class="container container-main">  
+        <div class="panel panel-body">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <p class="badge btn-block">Appar</p>
@@ -27,7 +27,7 @@
                     <div class="">
                         <p class="badge btn-block">Kategorier</p>
                         <div id="categories-template" class="">
-                            Loading...
+                            Välj app först...
                         </div>
                     </div>
                     <!-- Categories End -->
@@ -35,7 +35,7 @@
                     <div class="">
                         <p class="badge btn-block">Platser</p>
                         <div id="places-template" class="">
-                            Loading...
+                            Välj Kategori först...
                         </div>
                     </div>
                     <!-- Places End-->
@@ -43,11 +43,10 @@
                     <div class="">
                         <p class="badge btn-block">Minnesmärke!</p>
                         <div id="place-content-template" class="">
-                            Loading...
+                            Välj Plats först...
                         </div>
                     </div>
-                    <!-- Place Contetn End-->
-                </div>>
+                </div>
             </div>  
         </div>
     </div>
@@ -65,54 +64,8 @@
     <script src="~/Scripts/aa.grain.of.gold.Category.js"></script>
     <script src="~/Scripts/aa.grain.of.gold.Place.js"></script>
     <script src="~/Scripts/aa.grain.of.gold.Forecast.js"></script>
+    <script src="~/Scripts/aa.grain.of.gold.google.map.js"></script>
     <script src="~/Scripts/aa.grain.of.gold.mustache.templates.js"></script>
-
-    <script>
-        function addMarkers(categories) {
-
-            var locations = [];
-            $.each(categories, function (i, category) {
-                $.each(category.Places, function (i, place) {
-
-                    locations.push([place.Name, place.Latitude, place.Longitude]);
-                })
-
-            })
-
-            var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-                zoom: 4,
-                center: new google.maps.LatLng(60, 18),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
-
-            var infowindow = new google.maps.InfoWindow;
-
-            var marker, i;
-
-            for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map
-                });
-
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                    return function () {
-                        infowindow.setContent(locations[i][0]);
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            }
-        }
-    </script>
-    
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQZH5YuDq0lFmASM7NP4zoB1i66e39QSM&callback=addMarkers" async defer></script>
-
-
-
-
-
 }
 
 
