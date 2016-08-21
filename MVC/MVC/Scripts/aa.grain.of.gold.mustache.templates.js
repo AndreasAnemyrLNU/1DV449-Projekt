@@ -38,7 +38,7 @@ function renderPlaces(places) {
 }
 
 function renderPlaceBtn(place) {
-	var tpl = `<btn id="${replacaSpacesWithUnderscore(place.Name)}_${place.Id}" class='btn btn-sm btn-primary-ui' data-model='place'>{{Name}}</btn>`;
+	var tpl = `<btn id="${replacaSpacesWithUnderscore(place.Name)}_${place.Id}" class='btn btn-primary-ui-place' data-model='place'>{{Name}}</btn>`;
 	return Mustache.to_html(tpl, place)
 }
 

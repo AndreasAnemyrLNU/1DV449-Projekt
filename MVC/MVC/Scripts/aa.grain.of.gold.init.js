@@ -6,12 +6,74 @@
 }
 //End
 
+//This just simulates a slow writeprocess....
+function wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
+}
+
+function appStatusOk() {
+    $(`#status`).removeClass(`app-status-unsaved`);
+    $(`#status`).addClass(`app-status-ok`);
+}
+
+function appStatusUnsaved() {
+    $(`#status`).removeClass(`app-status-ok`);
+    $(`#status`).addClass(`app-status-unsaved`);
+}
+
+//TODO this both logiq and view. Refactor it later!!!!
+function appConnectionQuality(value) {
+
+    //DRY I KNOW.... - but i keep it simle....
+    if (value < 1500)
+        $(`#connection-quality-backend`).text(`Bad Connection!`);
+    if (value < 950)
+        $(`#connection-quality-backend`).text(`| (Response - ${value}/ms)`);
+    if (value < 920)
+        $(`#connection-quality-backend`).text(`||| (Response - ${value}/ms)`);
+    if (value < 800)
+        $(`#connection-quality-backend`).text(`||||| (Response - ${value}/ms)`);
+    if (value < 700)
+        $(`#connection-quality-backend`).text(`||||||| (Response - ${value}/ms)`);
+    if (value < 600)
+        $(`#connection-quality-backend`).text(`||||||||| (Response - ${value}/ms)`);
+    if (value < 500)
+        $(`#connection-quality-backend`).text(`||||||||||| (Response - ${value}/ms)`);
+    if (value < 150)
+        $(`#connection-quality-backend`).text(`|||||||||||| (Response - ${value}/ms)`);
+    if (value < 120)
+        $(`#connection-quality-backend`).text(`|||||||||||||| (Response - ${value}/ms)`);
+    if (value < 90)
+        $(`#connection-quality-backend`).text(`|||||||||||||||| (Response - ${value}/ms)`);
+    if (value < 70)
+        $(`#connection-quality-backend`).text(`|||||||||||||||||| (Response - ${value}/ms)`);
+    if(value < 50)
+        $(`#connection-quality-backend`).text(`|||||||||||||||||||| (Response - ${value}/ms)`);
+}
+
+var i = 10
 //Mechanism to save state in localstorage
 function autoSaveToLocalStorage() {
-    localStorage.setItem("State.Apps", JSON.stringify(State.Apps));
-    console.info("State was now saved into localstorage...")
 
-    setTimeout(autoSaveToLocalStorage, 1000)
+    try {
+
+        if (i == 0) {
+            throw new Error("Browser unable to save data!!!...");
+        }
+        localStorage.setItem("State", JSON.stringify(State));
+        console.info(`State was now saved (for the ${i} time), into localstorage...`);
+        appStatusOk();
+        i--;
+    } catch (err) {
+        appStatusUnsaved();
+        console.warn(err.message);
+    }
+
+    setTimeout(autoSaveToLocalStorage, 5000)
 }
 // End    
 
@@ -19,6 +81,20 @@ init();
 
 function init()
 {
+    //Connection test!
+    (function DecideConnectionQuality() {
+
+        var time = new Date();
+
+        $.get("/", function (data) {
+            console.log(time.getMilliseconds());
+        });
+
+        appConnectionQuality(time.getMilliseconds());
+
+        setTimeout(DecideConnectionQuality, 2500)
+    })();
+
     GetApps();
     autoSaveToLocalStorage();
 

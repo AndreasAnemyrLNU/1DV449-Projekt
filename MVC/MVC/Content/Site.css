@@ -100,12 +100,12 @@ caption, a, address, label{
 }
 
 .btn-primary{
-    color: #222222;
+    color: #f6e6b4;
     display: inline-block;
     font-weight: 600;
     border: none;
     margin:  10px;
-    box-shadow: #EDD69C 0 0px 7px; 
+    box-shadow: #EDD69C 0 0px 7px;
 
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
     background: #f6e6b4; /* Old browsers */
@@ -118,9 +118,9 @@ caption, a, address, label{
 .btn-primary-ui-app{
     color: #222222;
     display: inline-block;
-    font-weight: 600;
+    font-weight: 800;
     letter-spacing: 2px;
-    margin:  0;
+    margin-bottom:  8px;
     padding: 15px;
     border: 1px solid black;
     border-radius: 20px;
@@ -139,7 +139,26 @@ caption, a, address, label{
     display: inline-block;
     font-weight: 600;
     letter-spacing: 2px;
-    margin:  0;
+    margin:  0 0 8px;
+    padding: 11px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: #EDD69C 0 0px 7px; 
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
+    background: #f6e6b4; /* Old browsers */
+    background: -moz-linear-gradient(top,  #f6e6b4 0%, #ed9017 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #f6e6b4 0%,#ed9017 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #f6e6b4 0%,#ed9017 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-primary-ui-place{
+    color: #222222;
+    display: inline-block;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin:  0 0 8px;
     padding: 11px;
     border: 1px solid black;
     border-radius: 20px;
@@ -334,7 +353,6 @@ footer p{
 }
 
 .container-main{ 
-    border: 5px double black;
     border-radius: 20px;
     padding: 0;
     margin-bottom: 0;
@@ -343,5 +361,30 @@ footer p{
 }
 
 /*Compass End*/
+
+.status-unsaved{
+    color: red;
+    display: block;
+    float: left;
+    left: 3px;
+    position: relative;
+    top: -14px;
+    transform: rotate(-90deg);
+    font-size: 35px;
+    opacity: .5;
+}
+
+.app-status-ok{
+    color: lightgreen;
+    opacity: 1;
+
+}
+.connection-quality-backend{
+    font-weight: 900;
+    text-align: center;
+    left: 15px;
+    position: relative;
+}
+
 
 
