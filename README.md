@@ -26,12 +26,15 @@ med code first approach.
 >Api:et skapades för att möta approachen offline-first.
 >Grain Of Gold har ett publikt ("read-only") api som svara med strukturerad ***JSON***.		
 >(JSON-datat är *speglingar* av applikationens modeller.)		
->URL: http://www.grain-of-gold/app.anemyr.me		
+>URL: http://grain-of-gold/app.anemyr.me		
 >>Http GET: /apps/GetApps/
 >>>Code: 200 Ok.
 >>>Code: 404 Not Found.     
 
 >>Http GET: /apps/GetPlaceForecasts/        
+>>>>Code: 200 Ok.
+>>>>Code: 400 Bad Request.
+>>>>Code: 404 Not Found
 	
 >>Http GET: /apps/GetCategoryPlaces/id      
 >>>>Code: 200 Ok.
