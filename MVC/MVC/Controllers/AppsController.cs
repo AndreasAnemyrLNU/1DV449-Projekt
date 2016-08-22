@@ -189,9 +189,15 @@ namespace MVC.Controllers
 
         public ActionResult GetApps()
         {
+
             AppViewModel appViewModel = new AppViewModel();
 
             IEnumerable<App> apps = db.Apps;
+
+            if(apps.FirstOrDefault() == null)
+            {
+                return HttpNotFound();
+            }
 
             var jsonResult = JsonConvert.SerializeObject(apps, Formatting.None,
                               new JsonSerializerSettings
@@ -202,9 +208,28 @@ namespace MVC.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetAppCategories(int? id = 33)
+        public ActionResult GetAppCategories(int? id)
         {
             AppViewModel appViewModel = new AppViewModel();
+
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Include your id!");
+            }
+
+            if (db.Apps.FirstOrDefault() == null)
+            {
+                return HttpNotFound("No apps in db yet!");
+            }
+
+            if (db.Apps.Find(id) == null){
+                return HttpNotFound("Please, check your app id before next request!");
+            }
+            
+            if (db.Apps.Find(id).Categories.FirstOrDefault() == null)
+            {
+                return HttpNotFound("No categories for selected app yet!");
+            }
 
             IEnumerable<Category> categories = db.Apps.Find(id).Categories;
 
@@ -219,6 +244,26 @@ namespace MVC.Controllers
 
         public ActionResult GetCategoryPlaces(int? id)
         {
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Include your id!");
+            }
+
+            if (db.Categories.FirstOrDefault() == null)
+            {
+                return HttpNotFound("No categories in db yet!");
+            }
+
+            if (db.Categories.Find(id) == null)
+            {
+                return HttpNotFound("Please, check your category id before next request!");
+            }
+
+            if (db.Categories.Find(id).Places.FirstOrDefault() == null)
+            {
+                return HttpNotFound("No categories for selected place yet!");
+            }
+
             IEnumerable<Place> categoryPlaces = db.Categories.Find(id).Places;
 
             var jsonResult = JsonConvert.SerializeObject(categoryPlaces, Formatting.None,
@@ -230,8 +275,28 @@ namespace MVC.Controllers
             return Json(jsonResult, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetPlaceForecasts(int id)
+        public ActionResult GetPlaceForecasts(int? id)
         {
+            if (!id.HasValue)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Include your id!");
+            }
+
+            if (db.Places.FirstOrDefault() == null)
+            {
+                return HttpNotFound("No places in db yet!");
+            }
+
+            if (db.Places.Find(id) == null)
+            {
+                return HttpNotFound("Please, check your place id before next request!");
+            }
+
+            if (db.Places.Find(id).Forecasts.FirstOrDefault() == null)
+            {
+                return HttpNotFound("No forecasts for selected place yet!");
+            }
+
             Place place = db.Places.Find(id);
             
             IEnumerable<Forecast> forecasts = new WeatherService(db).RefreshForecast(place.Latitude, place.Longitude);
