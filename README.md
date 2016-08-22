@@ -106,7 +106,7 @@ för att återuppta interaktionen.
 Webbapplikationen ger kontinuerlig feedback till användaren              
 för enhetens status gällande uppkopplingen. Troligtvis kommer      
 nuvarande implementering att mätas för att se om det är     
-éventuellt är för täta anrop. vilket eventuellt kan ses som negativt.       
+éventuellt är för täta anrop. vilket eventuellt kan ses som negativt.              
 Man skulle dessutom kunna optimera anropet för att minska
 den totala mängden konsumerad trafik i ändmålet.      
 
@@ -116,6 +116,37 @@ användarens syfte är att lagra information som
 har med kriminell verksamhet att göra. Även om      
 webbapplikationen har ett syfte och ändamål,
 att lagra guldkorn, så skulle den redan i nuvarande     
-version kunna användas för att planera flykter gömmor etc. 
+version kunna användas för att planera flykter, gömmor etc.
+
+###Egen reflektion kring projektet
+
+>Nya tekniker     
+>>Code First Entity Framework       
+>>Mustache.js (js templating)       
+>>Binero.se, behov av stöd för ASP.NET      
+
+Mitt primära mål för mig personligen var att utöka      
+mina tankebanor hur användarinnehåll genereras och      
+hur man som användare med javascript kan bearbeta       
+innehållet på klinensidan i webbläsaren. Tidigare       
+har jag känt på att jobba med mvc som arkitektur.       
+Att kunna hantera json i backend både mot servrars      
+externa api och egenkodat api var ett stort mål.        
+Detta har resulterat i att jag fått viss erfarenhet
+av att sätta status beroende på status i objekt
+efter sökningar mot sql server. Detta kan man
+se i appsController och de metoder som svara
+med JSON. Trodde jag att JSON var viktigt tidigare
+så är det nog trots allt först nu jag verkligen 
+förstår poäng med att kunna hantera JSON.
+
+###Framtiden
+1. Att bygga appar som jobbar mot ett komplett CRUD-API.
+2. Att ge användare möjlighet att dela sina appar med varandra.
+3. Att logga in via konto hos facebook
+4. Att nyttja fler av goolge maps api:er
+5. Att låta anändare välja gratis tema.
+6. Att möjliggöra köp av skrädarsydda extensions. efter kundens behov.
+
 
 
