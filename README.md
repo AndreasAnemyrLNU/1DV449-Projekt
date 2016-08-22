@@ -3,10 +3,13 @@
 ###Använda API:er		
 [OpenWeatherMap API](http://openweathermap.org/)		
 [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/tutorial/)		
-[Grain Of Gold](https://grain-of-gold.anemyr.me)	
->Api:et skapades för att möta approachen offline-first.
->Grain Of Gold har ett publikt ("read-only") api som svara med strukturerad ***JSON***.		
->(JSON-datat är *speglingar* av applikationens modeller.)		
+[Grain Of Gold](https://grain-of-gold.anemyr.me)        	
+
+Api:et skapades för att möta approachen offline-first.           
+Grain Of Gold har ett publikt ("read-only") api,       
+som svara med strukturerad ***JSON***.		
+JSON-datat är *speglingar* av applikationens modeller.		
+
 >URL: http://grain-of-gold/app.anemyr.me		
 >>Http GET: /apps/GetApps/
 >>>Code: 200 Ok.
@@ -60,5 +63,51 @@ Domänmodellen består i utvecklingen av två many-to-many relationer.
 ###Databasmodellering
 Databasen har genererats med entity framework 6,		
 med code first approach.
+
+###Säkerhet & Prestandaoptimering
+Applikationens backend är byggt med ASP.NET MVC 5.                   
+Validering av data sker genom data annotations.          
+På detta sätt stödj validering i tre steg.            
+Anledningen till detta är att klienten valideras                    
+hos klienten med javscript. Kommer klinenten genom            
+den valideringen väntas en ny validering när        
+modellens status kontrolleras. Det görs mot      
+angivna data annotation attribute i modelklassen.       
+Dessutom förhindras att bindningar kan ske till          
+samtliga egenskaper i klassen. Detta är möjligt genom att              
+använda attributet bind med en inkluderingslista för         
+godkända bindningar.
+
+###Offline-first
+Grain of Gold har utvecklats med et tydligt mål.        
+Att strukturen från domänmodellen bibehålls intakt,     
+i sin struktur, änd ut på klienten. På detta vis kan                
+kan man namnge sina metoder lika både på backend och frontend,      
+med samma uppgift.        
+
+Ett stort dilemma när det gäller tillvägagångssättet         
+offline first, är att man måste hitta ett effektivt     
+sätt att behålla status efter en användares interaktion.        
+
+Grain of Gold har i sin nuvarande for ett objeckt       
+som är en wrapper för applikationens status. Objektet                       
+heter State dessutom. Objektet state sparas ned automatiskt     
+till localstorate inom en rekursiv timeout. Intervallerna       
+på detta skulle man alltså enkelt kunna ändra.
+
+I nuvarande version finns det stöd för t.ex tappat wifi.                
+Man kan således att fortsätta att navigera i menyer,              
+trots att man förlorat sin uppkoppling.     
+Däremot finns ej stöd för att man stänger ned sin klient        
+för att återuppta interaktionen.      
+
+Webbapplikationen ger upprepad feedback till användare              
+vilken status uppkopplingen är av. Troligen kommer      
+nuvarande implementering att göras om då det är täta anrop                
+vilket eventuellt kan ses som negativt. Man skulle      
+även kunna optimera anropet att svara ut innehåll.      
+
+###Risker med din applikation
+
 
 
