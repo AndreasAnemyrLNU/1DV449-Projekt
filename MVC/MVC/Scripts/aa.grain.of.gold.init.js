@@ -86,8 +86,11 @@ function init()
 
         var time = new Date();
 
-        $.get("/", function (data) {
-            console.log(time.getMilliseconds());
+        $.get("/apps/GetAppCategories/32", function (data, textStatus) {
+            if (textStatus !== "success") {
+                $(`#connection-quality-backend`).
+                    append(`Obs! Servern svarar ej på anrop!. Stäng inte av!`);
+            }
         });
 
         appConnectionQuality(time.getMilliseconds());
@@ -194,8 +197,11 @@ function GetCategoryPlaces(category)
 }
 
 function GetPlaceForecasts(place) {
-    $.get("/apps/GetPlaceForecasts/" + place.Id, function (data) {
+    $.get("/apps/GetPlaceForecasts/" + place.Id, function (data, textStatus) {
         place.Forecasts = JsonPlaceForecasts2PlaceForecasts(data)
+    }).fail(function () {
+        $(`#connection-quality-backend`).
+    text(`Openweathermap - No connection!`);
     });
 }
 

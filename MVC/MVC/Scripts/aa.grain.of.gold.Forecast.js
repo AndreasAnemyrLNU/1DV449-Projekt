@@ -48,5 +48,5 @@ Forecast.prototype.GetDate = function () {
 };
 
 Forecast.prototype.GetMonth = function () {
-    return new Date(this.timeFrom).getMonth().toLocaleString();
+    return parseInt(new Date(this.timeFrom).getMonth()) + 1;
 };

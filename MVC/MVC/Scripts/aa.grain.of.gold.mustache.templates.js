@@ -48,6 +48,9 @@ function renderPlaceContent(place) {
 	var tpl =
     `<h6 class="text-info"><strong >Namn: {{Name}}</strong><h6>` +
 	`<h6 class="text-info"><strong >Info: {{Description}}</strong><h6>` +
+    `<h6 class="text-info"><strong >Plats: {{Address}}</strong><h6>` +
+    `<h6 class="text-info"><strong >Latitude: {{Latitude}}</strong><h6>` +
+    `<h6 class="text-info"><strong >Longitude: {{Longitude}}</strong><h6>` +
 	`<h6 class="text-info"><strong >Sparad av: {{User}}</strong><h6>` +
     `<div id="mapCanvasPlace"></div>` +
     `<div class="jumbotron jumbotron-forecasts">` +

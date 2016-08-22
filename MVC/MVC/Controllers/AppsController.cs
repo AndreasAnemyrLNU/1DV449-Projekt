@@ -277,6 +277,7 @@ namespace MVC.Controllers
 
         public ActionResult GetPlaceForecasts(int? id)
         {
+            /*TODO Implement cache strategy for forecasts!
             if (!id.HasValue)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Include your id!");
@@ -296,10 +297,18 @@ namespace MVC.Controllers
             {
                 return HttpNotFound("No forecasts for selected place yet!");
             }
+            */
+            //To avoid calling openweather for common requests.....
 
             Place place = db.Places.Find(id);
-            
+
+
             IEnumerable<Forecast> forecasts = new WeatherService(db).RefreshForecast(place.Latitude, place.Longitude);
+
+            if(!forecasts.Any())
+            {
+                return HttpNotFound("Openweathermap API down?");
+            }
 
             var jsonResult = JsonConvert.SerializeObject(forecasts, Formatting.None,
                               new JsonSerializerSettings
