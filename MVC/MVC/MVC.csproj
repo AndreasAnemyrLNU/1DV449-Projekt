@@ -365,6 +365,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\app.grain-of-gold.anemyr.me.pubxml" />
     <Content Include="Scripts\aa.grain.of.gold.App.js" />
     <Content Include="Scripts\aa.grain.of.gold.Place.js" />

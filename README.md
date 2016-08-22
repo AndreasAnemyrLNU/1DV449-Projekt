@@ -1,40 +1,11 @@
 # 1DV449-Projekt
----
-###Använda API:er		
-[OpenWeatherMap API](http://openweathermap.org/)		
-[Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/tutorial/)		
-[Grain Of Gold](https://grain-of-gold.anemyr.me)        	
-
-Api:et skapades för att möta approachen offline-first.           
-Grain Of Gold har ett publikt ("read-only") api,       
-som svara med strukturerad ***JSON***.		
-JSON-datat är *speglingar* av applikationens modeller.		
-
->URL: http://grain-of-gold/app.anemyr.me		
->>Http GET: /apps/GetApps/
->>>Code: 200 Ok.
->>>Code: 404 Not Found.     
-
->>Http GET: /apps/GetPlaceForecasts/                        
->>>>Code: 200 Ok.       
->>>>Code: 400 Bad Request.      
->>>>Code: 404 Not Found     
-	
->>Http GET: /apps/GetCategoryPlaces/id      
->>>>Code: 200 Ok.       
->>>>Code: 400 Bad Request.      
->>>>Code: 404 Not Found     
-		
->>Http GET: /apps/GetAppCategories/id       		
->>>Code: 200 Ok.        
->>>Code: 400 Bad Request.       
->>>Code: 404 Not Found.     
 
 ###Rapport
 ####Inledning 
 #####Teknik:
-Backend: MVC5 (C#)      
-Frontend: HTML, CSS, JS (pluging jquery mustach).       
+Ramverk Backend: MVC5 (C#).
+Ramverk Frontend: Bootstrap, JQuery och Mustach.js.      
+Frontend: HTML, CSS, JS.       
 Webhotell: Binero.      
 
 ###Publicerad
@@ -60,7 +31,7 @@ Domänmodellen består i dagsläget av två many-to-many relationer,
 enlig diagram nedan. Webapplikatione använder sig av ramverkets
 autentiseringsmodell. Diagrammet uteslutar denna del.
 
-![grain-of-gold][(https://github.com/AndreasAnemyrLNU/1DV449-Projekt/blob/master/database_diagram.png.png)]
+![generead db med codefirst](./database_diagram.png.png)
 
 ###Databasmodellering
 Databasen har genererats med entity framework 6,		
@@ -110,7 +81,66 @@ för enhetens status gällande uppkopplingen. Troligtvis kommer
 nuvarande implementering att mätas för att se om det är     
 éventuellt är för täta anrop. vilket eventuellt kan ses som negativt.              
 Man skulle dessutom kunna optimera anropet för att minska
-den totala mängden konsumerad trafik i ändmålet.      
+den totala mängden konsumerad trafik i ändmålet.    
+
+Applikation är framtagen med krav att den
+ska anpassa sig enligt mobile first. 
+På de enheter som den testats fungerar detta
+utan några större probelm. Ramverket Bootstrap
+har varit till ett stort stöd att få dett
+att fungera någorlunda smärtfritt.  
+
+###Använda API:er		
+[OpenWeatherMap API](http://openweathermap.org/)
+Openweathermap används för att hämta en komplett väderprogns för en av användare sparad plats.
+Modellen Forecast återspeglar den JSON som tolkas innan svaret går vidare till Grain Of Gold.
+
+[Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/tutorial/)		
+Google Maps används för att tilldela en markör på sparad plats.
+Värt att notera är den dynamiska uppdatering av formuläret - om man väljer
+att klicka och dra iväg en markör. Webbapplikation använder sig också av en sökfunktion     
+för att hitta en plats och automatsik placera markör i centrum i canvas.
+
+[Grain Of Gold](https://grain-of-gold.anemyr.me)        	
+Api:et skapades för att möta approachen offline-first.           
+Grain Of Gold har ett publikt ("read-only") api,       
+som svara med strukturerad ***JSON***.		
+JSON-datat är *speglingar* av applikationens modeller.		
+
+
+
+>URL: http://grain-of-gold/app.anemyr.me		
+>>Http GET: /apps/GetApps/
+>>>Code: 200 Ok.        
+>>>Code: 404 Not Found.     
+
+>>Http GET: /apps/GetPlaceForecasts/                        
+>>>>Code: 200 Ok.       
+>>>>Code: 400 Bad Request.      
+>>>>Code: 404 Not Found     
+	
+>>Http GET: /apps/GetCategoryPlaces/id      
+>>>>Code: 200 Ok.       
+>>>>Code: 400 Bad Request.      
+>>>>Code: 404 Not Found     
+		
+>>Http GET: /apps/GetAppCategories/id       		
+>>>Code: 200 Ok.        
+>>>Code: 400 Bad Request.       
+>>>Code: 404 Not Found.
+
+---
+
+![API GetApps/ Status Kod 200](./api_getapps_200_diagram.png)
+*Skärmdump: Avser ett lyckate anrop till /apps/GetApps/*
+
+![API GetApps/ Status Kod 400 ](./api_getapps_400_diagram.png)
+*Skärmdump: Avser ett lyckate anrop till /apps/GetApps/*
+
+![API GetApps/ Status Kod 404 Ok](./api_getapps_404_diagram.png)
+*Skärmdump: Avser ett lyckate anrop till /apps/GetApps/*
+
+---
 
 ###Risker med din applikation
 En etisk risk skulle eventuellt kunna vara om       
@@ -149,6 +179,7 @@ förstår poäng med att kunna hantera JSON.
 4. Att nyttja fler av goolge maps api:er
 5. Att låta anändare välja gratis tema.
 6. Att möjliggöra köp av skrädarsydda extensions. efter kundens behov.
+7. Jobba vidare med ett effektivare gränssnitt.
 
 
 
