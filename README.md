@@ -60,7 +60,7 @@ Domänmodellen består i dagsläget av två many-to-many relationer,
 enlig diagram nedan. Webapplikatione använder sig av ramverkets
 autentiseringsmodell. Diagrammet uteslutar denna del.
 
-![grain-of-gold][(./database_diagram.png.png)]
+![grain-of-gold][(https://github.com/AndreasAnemyrLNU/1DV449-Projekt/blob/master/database_diagram.png.png)]
 
 ###Databasmodellering
 Databasen har genererats med entity framework 6,		
