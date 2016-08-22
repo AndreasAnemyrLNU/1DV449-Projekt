@@ -56,9 +56,11 @@ Domänmodelleringen för backendsystemet ska vara generellt.
 Trots detta ska det vara möjligt att skapa sin egna app.        
 
 ###Domämodellering
-Domänmodellen består i utvecklingen av två many-to-many relationer.     
+Domänmodellen består i dagsläget av två many-to-many relationer,
+enlig diagram nedan. Webapplikatione använder sig av ramverkets
+autentiseringsmodell. Diagrammet uteslutar denna del.
 
-######Här en skiss på domänen!
+![grain-of-gold][(./database_diagram.png.png)]
 
 ###Databasmodellering
 Databasen har genererats med entity framework 6,		
