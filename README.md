@@ -81,9 +81,11 @@ godkända bindningar.
 ###Offline-first
 Grain of Gold har utvecklats med et tydligt mål.        
 Att strukturen från domänmodellen bibehålls intakt,     
-i sin struktur, änd ut på klienten. På detta vis kan                
-kan man namnge sina metoder lika både på backend och frontend,      
-med samma uppgift.        
+i sin struktur, ända ut på klienten. På detta vis                       
+är det möjligt att koda metoder, de som kan behövas,        
+lika både på backend och frontend. De metoder som       
+syftas är de som har med någon for av persistent     
+lagring att göra.        
 
 Ett stort dilemma när det gäller tillvägagångssättet         
 offline first, är att man måste hitta ett effektivt     
@@ -101,13 +103,19 @@ trots att man förlorat sin uppkoppling.
 Däremot finns ej stöd för att man stänger ned sin klient        
 för att återuppta interaktionen.      
 
-Webbapplikationen ger upprepad feedback till användare              
-vilken status uppkopplingen är av. Troligen kommer      
-nuvarande implementering att göras om då det är täta anrop                
-vilket eventuellt kan ses som negativt. Man skulle      
-även kunna optimera anropet att svara ut innehåll.      
+Webbapplikationen ger kontinuerlig feedback till användaren              
+för enhetens status gällande uppkopplingen. Troligtvis kommer      
+nuvarande implementering att mätas för att se om det är     
+éventuellt är för täta anrop. vilket eventuellt kan ses som negativt.       
+Man skulle dessutom kunna optimera anropet för att minska
+den totala mängden konsumerad trafik i ändmålet.      
 
 ###Risker med din applikation
-
+En etisk risk skulle eventuellt kunna vara om       
+användarens syfte är att lagra information som
+har med kriminell verksamhet att göra. Även om      
+webbapplikationen har ett syfte och ändamål,
+att lagra guldkorn, så skulle den redan i nuvarande     
+version kunna användas för att planera flykter gömmor etc. 
 
 
