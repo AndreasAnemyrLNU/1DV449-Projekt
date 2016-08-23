@@ -12,6 +12,9 @@ Webhotell: Binero.
 Userinterface:  [ui    grain-of-gold](http://grain-of-gold.anemyr.me/ui)        
 Admininterface: [admin grain-of-gold](http://grain-of-gold.anemyr.me)
 
+###Youtube
+[Presentationsklipp](https://youtu.be/hY4zGGlQb1s)
+
 ###Applikationsidé
 Visionen för denna webbapplikationen är att det ska vara möjligt        		
 att inom specifika kategorier, kunna skapa minnesmärken (guldkorn).          
