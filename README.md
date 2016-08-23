@@ -32,8 +32,8 @@ autentiseringsmodell. Diagrammet uteslutar dock denna del.
 Domänmodelleringen för backendsystemet ska vara generellt.            
 Trots detta ska det vara möjligt, för en användare,          
 att skapa sin egna app (intresseområde)     
-Detta har gjorts möjligt med many-to-many relationer av endast      
-tree tabeller. Väderdata sparas inte i dagsläget i databasen,       
+
+Väderdata sparas inte i dagsläget i databasen,       
 det är dock halvvägs implementerat. Tanken är att göra      
 en cachelösning för att minska antalet förfrågningar                
 till openweathermaps api.       
@@ -62,7 +62,7 @@ Inga egna inställningar har gjort då det inte
 ansågs nödvändigt.      
 
 ###Offline-first
-Grain of Gold har utvecklats med et tydligt mål.             
+Grain of Gold har utvecklats med ett tydligt mål.             
 Att strukturen från domänmodellen bibehålls intakt,     
 i sin struktur, ända ut på klienten. 
 
@@ -72,17 +72,17 @@ sätt att behålla status efter en användares interaktion.
 
 Grain of Gold har i sin nuvarande form ett objekt       
 som är en wrapper för applikationens totala status.     
-Objektet variabelnämn är State.     
+Objektet variabelnamn är State.     
 Objektet state sparas ned automatiskt     
 till localstorate genom en rekursiv timeout.        
-Tidintervallerna för autosparande skulle härmded        
-användare själv kunna påverka efter sing egen vilja.
+Tidsintervallen för autosparandet kan därmed        
+relative enkelt förändras efter eget tycke och smak.
 
-I nuvarande version finns det stöd för t.ex tappat wifi.                      
-Man kan utan uppkoppling fortsätta att navigera i menyer,              
-trots att man förlorat sin uppkoppling.     
-Däremot finns ej stöd för att avsluta webbläsaren              
-för att därefter återuppta vid avslut. Detta finns            
+I nuvarande version finns det stöd för tappad uppkoppling.                            
+Man kan obehindrat fortsätta att navigera i menyer,           
+trots att man förlorat sin uppkoppling.      
+Däremot finns ännu ej stöd för att avsluta webbläsaren              
+och att därefter återuppta arbetet igen. Detta finns            
 det dock utan några större ingrepp möjlighet att fixa.      
 
 Webbapplikationen ger kontinuerlig feedback till användaren                   
@@ -166,22 +166,22 @@ version kunna användas för att planera flykter, gömmor etc.
 >>Mustache.js (js templating)       
 >>Binero.se, behov av stöd för ASP.NET      
 
-Mitt primära mål för mig personligen var att utöka      
-mina tankebanor hur användarinnehåll genereras och      
-hur man som användare med javascript kan bearbeta       
+Ett primärt mål för var att utöka      
+mina tankebanor om hur användarinnehåll genereras och      
+hur man som utvecklare inom javascript kan bearbeta       
 innehållet på klinensidan i webbläsaren. Tidigare       
 har jag testat att jobba med mvc som arkitektur.       
 Att kunna hantera json i backend både mot servrars      
 externa api och egenkodat api var ett stort mål.                
-Detta har resulterat i att jag fått viss erfarenhet
-av att sätta status beroende på status i objekt     
-efter sökningar mot sql server. Detta kan man       
+Detta har resulterat i att jag fått viss erfarenhet     
+av att returnera ststuskoder beroende på status i objekt             
+efter sökningar mot exempelvis sql server. Spår av detta kan man       
 se i appsControllern - de metoder som svara        
 med JSON. Sammanfattningsvisk kan man säga så här.      
 
 -"Trodde jag att JSON var viktigt tidigare      
 så är det nog trots allt först nu jag verkligen      
-förstår poäng med att kunna hantera JSON."       
+förstår vikten av att kunna hantera JSON."       
 
 ###Framtiden
 1. Att bygga appar som jobbar mot ett komplett CRUD-API.        
