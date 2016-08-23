@@ -70,10 +70,11 @@ för att uppnå ökad säkerhet vid överföring av data på nätet.
 
 >Injection
 >>[Login](http://grain-of-gold.anemyr.me/Account/Login)     
->>Javscript inaktiverades, för att undvika klientvalideringen,       
-efter detta gjordes försäk att skjuta in taggen <script>.       
-Detta lyckades inte eftersom ramverket förhindrar denna typ av atack.       
-Skräddarsydd felhantering med enhetlig design bör ordnas.
+>>Javscript inaktiverades, för att undvika klientvalideringen.
+Efter detta gjordes försök att skjuta in script-taggen.
+Detta lyckades inte eftersom ramverket förhindrar denna typ av attack.
+Skräddarsydd felhantering med enhetlig design bör dock ordnas.
+
 
 ###Offline-first
 Grain of Gold har utvecklats med ett tydligt mål.             
