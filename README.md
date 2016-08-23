@@ -61,6 +61,20 @@ så att statiska filer verkas cachas i systemet.
 Inga egna inställningar har gjort då det inte       
 ansågs nödvändigt.      
 
+#####Följande kontroller genomförda:
+
+>Http
+>>Idag använder servern endast http. Eftersom autentisiering             
+och auktorisering kommer är aktuellt bör https stödjas omgående      
+för att uppnå ökad säkerhet vid överföring av data på nätet.        
+
+>Injection
+>>[Login](http://grain-of-gold.anemyr.me/Account/Login)     
+>>Javscript inaktiverades, för att undvika klientvalideringen,       
+efter detta gjordes försäk att skjuta in taggen <script>.       
+Detta lyckades inte eftersom ramverket förhindrar denna typ av atack.       
+Skräddarsydd felhantering med enhetlig design bör ordnas.
+
 ###Offline-first
 Grain of Gold har utvecklats med ett tydligt mål.             
 Att strukturen från domänmodellen bibehålls intakt,     
