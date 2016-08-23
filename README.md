@@ -141,13 +141,13 @@ JSON-datat är *speglingar* av applikationens modeller.
 ---
 
 ![API GetApps/ Status Kod 200](./api_getapps_200_diagram.png)
-*Skärmdump: Avser ett lyckate anrop till /apps/GetApps/*
+*Skärmdump: Avser ett lyckat anrop till /apps/GetApps/*
 
 ![API GetApps/ Status Kod 400 ](./api_getapps_400_diagram.png)
-*Skärmdump: Avser ett lyckate anrop till /apps/GetApps/*
+*Skärmdump: Avser ett misslyckat anrop till /apps/GetApps/*
 
 ![API GetApps/ Status Kod 404 Ok](./api_getapps_404_diagram.png)
-*Skärmdump: Avser ett lyckate anrop till /apps/GetApps/*
+*Skärmdump: Avser ett misslyckat anrop till /apps/GetApps/*
 
 ---
 
