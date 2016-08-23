@@ -166,7 +166,7 @@ version kunna användas för att planera flykter, gömmor etc.
 >>Mustache.js (js templating)       
 >>Binero.se, behov av stöd för ASP.NET      
 
-Ett primärt mål för var att utöka      
+Ett primärt mål för mig var att utöka      
 mina tankebanor om hur användarinnehåll genereras och      
 hur man som utvecklare inom javascript kan bearbeta       
 innehållet på klinensidan i webbläsaren. Tidigare       
@@ -176,8 +176,8 @@ externa api och egenkodat api var ett stort mål.
 Detta har resulterat i att jag fått viss erfarenhet     
 av att returnera ststuskoder beroende på status i objekt             
 efter sökningar mot exempelvis sql server. Spår av detta kan man       
-se i appsControllern - de metoder som svara        
-med JSON. Sammanfattningsvisk kan man säga så här.      
+se i appsControllern - de metoder som returnerar JSON.      
+Sammanfattningsvisk kan man säga så här.      
 
 -"Trodde jag att JSON var viktigt tidigare      
 så är det nog trots allt först nu jag verkligen      
