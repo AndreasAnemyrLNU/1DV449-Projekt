@@ -66,7 +66,7 @@ användare inom Sverige. I framtiden kan dock detta komma
 att undersökas, om det finns eventuell optimering som kan uppnås.           
 
 Det finns ett antal js-filer, med  ett precix av aa.grain-of-gold.*.            
-Dessa ligger idag som separata inlänkningar, innan bodytaggen stängs.        
+Dessa ligger idag som separata inlänkningar, precis innan bodytaggen stängs.        
 För att minska antalet förfrågningar vore det fördel att slå ihop dessa     
 och eventuellt minifiera för att minska storleken på filerna.       
 
