@@ -59,7 +59,16 @@ godkända bindningar.
 Det har gjorts en del tester i loggar för att se över              
 så att statiska filer verkas cachas i systemet.     
 Inga egna inställningar har gjort då det inte       
-ansågs nödvändigt.      
+ansågs nödvändigt.     
+
+Inga CDN:er används då applikationen endast riktar sig mot             
+användare inom Sverige. I framtiden kan dock detta komma            
+att undersökas, om det finns eventuell optimering som kan uppnås.           
+
+Det finns ett antal js-filer, med  ett precix av aa.grain-of-gold.*.            
+Dessa ligger idag som separata inlänkningar, innan bodytaggen stängs.        
+För att minska antalet förfrågningar vore det fördel att slå ihop dessa     
+och eventuellt minifiera för att minska storleken på filerna.       
 
 #####Följande kontroller genomförda:
 
